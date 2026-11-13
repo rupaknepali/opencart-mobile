@@ -1,0 +1,1317 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Developer Guide: OpenCart Mobile App</title>
+<meta name="description" content="Developer guide for the OpenCart 4.1.0.4 mobile app and its Mobile App API extension.">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" id="hljs-light" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github.min.css">
+<link rel="stylesheet" id="hljs-dark" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github-dark.min.css" disabled>
+<style>
+  :root { --doc-sidebar-width: 300px; }
+  html { scroll-padding-top: 5rem; }
+  body { background: var(--bs-body-bg); overflow-x: hidden; }
+  .navbar > .container-fluid { flex-wrap: nowrap; }
+  .navbar-brand { min-width: 0; flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  main { min-width: 0; }
+  .code-block pre { overflow-x: auto; }
+  .navbar-brand small { font-weight: 400; opacity: .75; }
+  .doc-sidebar { position: sticky; top: 4.5rem; height: calc(100vh - 5.5rem); overflow-y: auto; }
+  .doc-sidebar .nav-link { padding: .2rem .75rem; color: var(--bs-secondary-color); border-left: 2px solid transparent; font-size: .9rem; }
+  .doc-sidebar .toc-h2 { color: var(--bs-body-color); font-weight: 600; margin-top: .35rem; }
+  .doc-sidebar .toc-h3 { padding-left: 1.5rem; font-size: .84rem; }
+  .doc-sidebar .toc-sub { display: none; }
+  .doc-sidebar .toc-h2.active + .toc-sub, .doc-sidebar .toc-sub:has(.active) { display: flex; }
+  .doc-sidebar .nav-link.active { color: var(--bs-primary); border-left-color: var(--bs-primary); background: var(--bs-primary-bg-subtle); }
+  .doc-sidebar .nav-link.hidden-by-filter { display: none !important; }
+  main { max-width: 980px; }
+  .doc-section { padding-bottom: 1.5rem; margin-bottom: 2rem; border-bottom: 1px solid var(--bs-border-color); }
+  .doc-section:last-child { border-bottom: 0; }
+  h2 { margin-top: .5rem; margin-bottom: 1.25rem; padding-bottom: .4rem; font-weight: 700; }
+  h3 { margin-top: 2rem; margin-bottom: .9rem; font-weight: 600; }
+  h4 { margin-top: 1.5rem; font-size: 1.1rem; font-weight: 600; }
+  .anchor-link { margin-left: .5rem; text-decoration: none; opacity: 0; color: var(--bs-secondary-color); }
+  h2:hover .anchor-link, h3:hover .anchor-link { opacity: 1; }
+  p code, li code, td code, th code { color: var(--bs-code-color); background: var(--bs-tertiary-bg); padding: .1rem .3rem; border-radius: .25rem; font-size: .85em; }
+  .code-block pre { margin: 0; border-radius: .5rem; border: 1px solid var(--bs-border-color); }
+  .code-block pre code.hljs { padding: 1rem; border-radius: .5rem; font-size: .84rem; line-height: 1.5; }
+  .code-block pre code:not(.hljs) { display: block; padding: 1rem; background: var(--bs-tertiary-bg); font-size: .84rem; }
+  .copy-btn { position: absolute; top: .5rem; right: .5rem; z-index: 2; opacity: 0; transition: opacity .15s; background: var(--bs-body-bg); }
+  .code-block:hover .copy-btn, .copy-btn:focus { opacity: 1; }
+  .table { font-size: .9rem; }
+  .table td, .table th { vertical-align: top; }
+  .diagram { overflow-x: auto; background: var(--bs-body-bg); }
+  .diagram pre.mermaid { margin: 0; background: transparent; text-align: center; }
+  .doc-hero { background: linear-gradient(135deg, var(--bs-primary-bg-subtle), var(--bs-body-bg)); border: 1px solid var(--bs-border-color); }
+  .doc-hero .lead { font-size: 1.05rem; }
+  ul.contains-task-list, li.task-list-item { list-style: none; padding-left: 0; }
+  #backToTop { position: fixed; right: 1rem; bottom: 1rem; display: none; z-index: 1030; }
+  @media (max-width: 991.98px) { .doc-sidebar { position: static; height: auto; } }
+  @media (max-width: 575.98px) { .doc-hero { padding: 1.25rem !important; } .doc-hero h1 { font-size: 1.6rem; } .table { font-size: .82rem; } }
+  @media print {
+    .navbar, .offcanvas-lg, #backToTop, .copy-btn, .anchor-link { display: none !important; }
+    main { max-width: none; }
+    .doc-section { break-inside: auto; }
+  }
+</style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#toc" data-bs-root-margin="0px 0px -70%" tabindex="0">
+
+<nav class="navbar navbar-expand bg-body-tertiary border-bottom sticky-top">
+  <div class="container-fluid">
+    <button class="btn btn-outline-secondary btn-sm d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar" aria-label="Open contents">
+      <i class="bi bi-list"></i>
+    </button>
+    <a class="navbar-brand fw-semibold text-truncate" href="#top"><i class="bi bi-phone me-1 text-primary"></i>Developer Guide: OpenCart Mobile App</a>
+    <div class="ms-auto d-flex align-items-center gap-2">
+      <span class="badge text-bg-secondary d-none d-sm-inline">OpenCart 4.1.0.4</span>
+      <span class="badge text-bg-primary d-none d-sm-inline">Expo SDK 58</span>
+      <button id="themeToggle" class="btn btn-outline-secondary btn-sm" type="button" aria-label="Toggle dark mode"><i class="bi bi-moon-stars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid" id="top">
+  <div class="row">
+    <aside class="col-lg-3 col-xl-3 border-end">
+      <div class="offcanvas-lg offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="sidebarLabel">Contents</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-block p-0">
+          <div class="doc-sidebar py-3 pe-2 w-100">
+            <div class="px-2 mb-3">
+              <input id="tocFilter" type="search" class="form-control form-control-sm" placeholder="Filter sections…" aria-label="Filter sections">
+            </div>
+            <nav id="toc" class="nav flex-column">
+              <a class="nav-link toc-h2" href="#1-what-this-project-is">1. What this project is</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#why-a-custom-extension-instead-of-opencarts-built-in-api">Why a custom extension instead of OpenCart's built-in API</a></nav><a class="nav-link toc-h2" href="#2-architecture-at-a-glance">2. Architecture at a glance</a><nav class="nav flex-column toc-sub"></nav><a class="nav-link toc-h2" href="#3-repository-layout">3. Repository layout</a><nav class="nav flex-column toc-sub"></nav><a class="nav-link toc-h2" href="#4-languages">4. Languages</a><nav class="nav flex-column toc-sub"></nav><a class="nav-link toc-h2" href="#5-tools-and-libraries-and-why-each-was-chosen">5. Tools and libraries, and why each was chosen</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#51-mobile-app">5.1 Mobile app</a><a class="nav-link toc-h3" href="#52-backend-and-dev-environment">5.2 Backend and dev environment</a></nav><a class="nav-link toc-h2" href="#6-why-expo">6. Why Expo</a><nav class="nav flex-column toc-sub"></nav><a class="nav-link toc-h2" href="#7-development-environment">7. Development environment</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#71-prerequisites">7.1 Prerequisites</a><a class="nav-link toc-h3" href="#72-start-the-store">7.2 Start the store</a><a class="nav-link toc-h3" href="#73-start-the-app">7.3 Start the app</a><a class="nav-link toc-h3" href="#74-useful-commands">7.4 Useful commands</a><a class="nav-link toc-h3" href="#75-editing-the-extension-locally">7.5 Editing the extension locally</a></nav><a class="nav-link toc-h2" href="#8-the-backend-the-mobile_api-opencart-extension">8. The backend: the mobile_api OpenCart extension</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#81-how-a-request-reaches-an-endpoint">8.1 How a request reaches an endpoint</a><a class="nav-link toc-h3" href="#82-the-base-class-systemlibraryapi_controllerphp">8.2 The base class: system/library/api_controller.php</a><a class="nav-link toc-h3" href="#83-the-startup-catalogcontrollerstartupmobile_apiphp">8.3 The startup: catalog/controller/startup/mobile_api.php</a><a class="nav-link toc-h3" href="#84-endpoint-files">8.4 Endpoint files</a><a class="nav-link toc-h3" href="#85-the-admin-module-admincontrollermodulemobile_apiphp">8.5 The admin module: admin/controller/module/mobile_api.php</a></nav><a class="nav-link toc-h2" href="#9-the-mobile-app">9. The mobile app</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#91-layers">9.1 Layers</a><a class="nav-link toc-h3" href="#92-start-up-sequence-apptsx">9.2 Start-up sequence (App.tsx)</a><a class="nav-link toc-h3" href="#93-api-client-srcapiclientts">9.3 API client (src/api/client.ts)</a><a class="nav-link toc-h3" href="#94-endpoints-and-types">9.4 Endpoints and types</a><a class="nav-link toc-h3" href="#95-state-management">9.5 State management</a><a class="nav-link toc-h3" href="#96-navigation">9.6 Navigation</a><a class="nav-link toc-h3" href="#97-theme-srcthemets">9.7 Theme (src/theme.ts)</a><a class="nav-link toc-h3" href="#98-components-srccomponents">9.8 Components (src/components)</a><a class="nav-link toc-h3" href="#99-screens-srcscreens">9.9 Screens (src/screens)</a></nav><a class="nav-link toc-h2" href="#10-design-patterns">10. Design patterns</a><nav class="nav flex-column toc-sub"></nav><a class="nav-link toc-h2" href="#11-hooks-which-ones-are-used-and-why">11. Hooks: which ones are used and why</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#111-react-built-in-hooks">11.1 React built-in hooks</a><a class="nav-link toc-h3" href="#112-react-query-hooks">11.2 React Query hooks</a><a class="nav-link toc-h3" href="#113-react-navigation-hooks">11.3 React Navigation hooks</a><a class="nav-link toc-h3" href="#114-custom-hooks-in-this-project">11.4 Custom hooks in this project</a></nav><a class="nav-link toc-h2" href="#12-flows-end-to-end">12. Flows, end to end</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#121-first-launch-and-session-creation">12.1 First launch and session creation</a><a class="nav-link toc-h3" href="#122-browsing">12.2 Browsing</a><a class="nav-link toc-h3" href="#123-authentication">12.3 Authentication</a><a class="nav-link toc-h3" href="#124-cart">12.4 Cart</a><a class="nav-link toc-h3" href="#125-wishlist">12.5 Wishlist</a><a class="nav-link toc-h3" href="#126-addresses">12.6 Addresses</a><a class="nav-link toc-h3" href="#127-checkout">12.7 Checkout</a><a class="nav-link toc-h3" href="#128-online-payment-webview">12.8 Online payment (WebView)</a><a class="nav-link toc-h3" href="#129-orders-and-reorder">12.9 Orders and reorder</a><a class="nav-link toc-h3" href="#1210-reviews">12.10 Reviews</a><a class="nav-link toc-h3" href="#1211-currency">12.11 Currency</a><a class="nav-link toc-h3" href="#1212-theme-colours">12.12 Theme colours</a></nav><a class="nav-link toc-h2" href="#13-configuration-reference">13. Configuration reference</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#131-app-environment-variables-mobileenv-srcconfigts">13.1 App: environment variables (mobile/.env, src/config.ts)</a><a class="nav-link toc-h3" href="#132-app-mobileappconfigts-and-easjson">13.2 App: mobile/app.config.ts and eas.json</a><a class="nav-link toc-h3" href="#133-store-module-settings-extensions--extensions--modules--mobile-app-api">13.3 Store: module settings (Extensions → Extensions → Modules → Mobile App API)</a><a class="nav-link toc-h3" href="#134-store-core-opencart-settings-the-app-reads-or-depends-on">13.4 Store: core OpenCart settings the app reads or depends on</a><a class="nav-link toc-h3" href="#135-local-docker-env">13.5 Local Docker: .env</a></nav><a class="nav-link toc-h2" href="#14-security-measures">14. Security measures</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#141-what-is-in-place">14.1 What is in place</a><a class="nav-link toc-h3" href="#142-things-to-understand-not-bugs-but-limits-of-the-design">14.2 Things to understand (not bugs, but limits of the design)</a><a class="nav-link toc-h3" href="#143-production-checklist">14.3 Production checklist</a></nav><a class="nav-link toc-h2" href="#15-extending-the-app">15. Extending the app</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#151-recipe-add-a-new-screen-that-uses-an-existing-endpoint">15.1 Recipe: add a new screen that uses an existing endpoint</a><a class="nav-link toc-h3" href="#152-recipe-add-a-new-api-endpoint">15.2 Recipe: add a new API endpoint</a><a class="nav-link toc-h3" href="#153-recipe-add-a-section-to-the-home-screen">15.3 Recipe: add a section to the Home screen</a><a class="nav-link toc-h3" href="#154-recipe-add-a-new-admin-setting">15.4 Recipe: add a new admin setting</a><a class="nav-link toc-h3" href="#155-recipe-add-a-shared-data-hook">15.5 Recipe: add a shared data hook</a><a class="nav-link toc-h3" href="#156-compatibility-rules-app-versions-vs-extension-versions">15.6 Compatibility rules (app versions vs extension versions)</a><a class="nav-link toc-h3" href="#157-adding-a-dependency">15.7 Adding a dependency</a></nav><a class="nav-link toc-h2" href="#16-checking-your-changes">16. Checking your changes</a><nav class="nav flex-column toc-sub"></nav><a class="nav-link toc-h2" href="#17-building-and-releasing">17. Building and releasing</a><nav class="nav flex-column toc-sub"><a class="nav-link toc-h3" href="#171-extension">17.1 Extension</a><a class="nav-link toc-h3" href="#172-app-eas">17.2 App (EAS)</a><a class="nav-link toc-h3" href="#173-upgrading-the-expo-sdk">17.3 Upgrading the Expo SDK</a></nav><a class="nav-link toc-h2" href="#18-troubleshooting">18. Troubleshooting</a><nav class="nav flex-column toc-sub"></nav><a class="nav-link toc-h2" href="#19-known-limitations-and-future-work">19. Known limitations and future work</a><nav class="nav flex-column toc-sub"></nav>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="col-lg-9 col-xl-9 px-3 px-md-4 py-4">
+      <div class="doc-hero rounded-3 p-4 mb-4">
+        <h1 class="display-6 fw-bold mb-3">Developer Guide: OpenCart Mobile App</h1>
+        <div class="lead"><p>This guide is for developers who will maintain or extend this project. It covers how the system is built and why. It also covers how each user flow works from start to finish, and how to add features safely.</p>
+<p>For installing the extension and running the app the first time, see the <a href="../README.md">README</a>. This guide assumes you have done that.</p>
+</div>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+          <span class="badge rounded-pill text-bg-light border">TypeScript</span>
+          <span class="badge rounded-pill text-bg-light border">React Native 0.88</span>
+          <span class="badge rounded-pill text-bg-light border">React Query 5</span>
+          <span class="badge rounded-pill text-bg-light border">React Navigation 7</span>
+          <span class="badge rounded-pill text-bg-light border">PHP 8.3</span>
+          <span class="badge rounded-pill text-bg-light border">OpenCart extension</span>
+        </div>
+      </div>
+
+      <section class="doc-section">
+<h2 id="1-what-this-project-is">1. What this project is<a class="anchor-link" href="#1-what-this-project-is" aria-label="Link to this section">#</a></h2>
+<p>A native iOS and Android shopping app for an <strong>OpenCart 4.1.0.4</strong> store. It has two parts that ship separately:</p>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Part</th><th scope="col">Folder</th><th scope="col">Runs on</th><th scope="col">Ships as</th></tr></thead><tbody><tr><td><strong>Mobile app</strong></td><td><code>mobile/</code></td><td>Phones (iOS, Android), with web for testing</td><td>App Store / Play Store build, or Expo Go during development</td></tr>
+<tr><td><strong>Mobile App API extension</strong></td><td><code>opencart-extension/mobile_api/</code></td><td>The OpenCart server (PHP)</td><td><code>mobile_api.ocmod.zip</code>, installed via Extensions → Installer</td></tr></tbody></table></div>
+<p>A local Docker store (<code>docker-compose.yml</code>, <code>store/</code>) is included for development only.</p>
+<h3 id="why-a-custom-extension-instead-of-opencarts-built-in-api">Why a custom extension instead of OpenCart&#39;s built-in API<a class="anchor-link" href="#why-a-custom-extension-instead-of-opencarts-built-in-api" aria-label="Link to this section">#</a></h3>
+<p>OpenCart 4.1.0.4 ships an API (<code>catalog/controller/api/*</code>), but it was built for the <strong>admin panel</strong>, not for public clients:</p>
+<ul>
+<li>Only the <code>api/order</code> and <code>api/subscription</code> routes are allowed.</li>
+<li>Every call needs an HMAC-SHA1 signature with a secret that must stay on the server.</li>
+<li>Calls are limited to whitelisted IP addresses. Phones have changing IPs.</li>
+<li>It <strong>trusts prices posted by the caller</strong>, which is safe for an admin but not for a customer.</li>
+<li>It has no catalog browsing, customer accounts, wishlist, or order history.</li>
+</ul>
+<p>So the extension adds a separate set of public JSON endpoints under <code>extension/mobile_api/api/*</code>. Wherever possible these call OpenCart&#39;s own models and controllers, so stock checks, option validation, taxes, totals, shipping, and payment behave exactly as they do on the website.</p>
+</section>
+<section class="doc-section">
+<h2 id="2-architecture-at-a-glance">2. Architecture at a glance<a class="anchor-link" href="#2-architecture-at-a-glance" aria-label="Link to this section">#</a></h2>
+<div class="diagram card card-body mb-4"><pre class="mermaid" data-src="flowchart TB
+  subgraph Phone[&quot;Phone (React Native app)&quot;]
+    UI[Screens and components] --&gt; Hooks[React Query hooks]
+    Hooks --&gt; Endpoints[api/endpoints.ts]
+    Endpoints --&gt; Client[api/client.ts]
+    Client &lt;--&gt; Secure[(SecureStore:&lt;br/&gt;session token, currency)]
+    UI -. online payment .-&gt; WV[WebView]
+  end
+
+  subgraph Server[&quot;OpenCart 4.1.0.4 server (PHP)&quot;]
+    FC[index.php front controller] --&gt; SU[startup/mobile_api&lt;br/&gt;restores session from header]
+    SU --&gt; API[extension/mobile_api/api/*&lt;br/&gt;controllers]
+    API --&gt; Base[ApiController base class&lt;br/&gt;guard, envelope, helpers]
+    API --&gt; Core[OpenCart core models and controllers&lt;br/&gt;cart, checkout, customer, catalog]
+    Core --&gt; DB[(MySQL / MariaDB)]
+    WV --&gt; Pay[checkout.pay HTML page] --&gt; Gateways[Payment extensions]
+  end
+
+  Client -- &quot;HTTPS JSON&lt;br/&gt;X-Api-Key, X-Session-Token&quot; --&gt; FC">flowchart TB
+  subgraph Phone[&quot;Phone (React Native app)&quot;]
+    UI[Screens and components] --&gt; Hooks[React Query hooks]
+    Hooks --&gt; Endpoints[api/endpoints.ts]
+    Endpoints --&gt; Client[api/client.ts]
+    Client &lt;--&gt; Secure[(SecureStore:&lt;br/&gt;session token, currency)]
+    UI -. online payment .-&gt; WV[WebView]
+  end
+
+  subgraph Server[&quot;OpenCart 4.1.0.4 server (PHP)&quot;]
+    FC[index.php front controller] --&gt; SU[startup/mobile_api&lt;br/&gt;restores session from header]
+    SU --&gt; API[extension/mobile_api/api/*&lt;br/&gt;controllers]
+    API --&gt; Base[ApiController base class&lt;br/&gt;guard, envelope, helpers]
+    API --&gt; Core[OpenCart core models and controllers&lt;br/&gt;cart, checkout, customer, catalog]
+    Core --&gt; DB[(MySQL / MariaDB)]
+    WV --&gt; Pay[checkout.pay HTML page] --&gt; Gateways[Payment extensions]
+  end
+
+  Client -- &quot;HTTPS JSON&lt;br/&gt;X-Api-Key, X-Session-Token&quot; --&gt; FC</pre></div>
+<p>Key ideas:</p>
+<ul>
+<li><strong>The server owns all state.</strong> The cart, checkout progress, login, and wishlist live in the OpenCart <strong>session</strong> on the server. The app is a thin client that renders what the server returns.</li>
+<li><strong>The session travels in a header.</strong> Native apps don&#39;t share the browser&#39;s <code>OCSESSID</code> cookie, so the app sends <code>X-Session-Token</code>. The extension&#39;s startup action reopens that session.</li>
+<li><strong>One response shape.</strong> Every endpoint returns <code>{success, data, message}</code> or <code>{success:false, error, errors}</code>.</li>
+<li><strong>Reuse over reimplementation.</strong> Adding to the cart calls core <code>api/cart.addProduct</code>. Totals call <code>api/cart.getTotals</code>. Offline payments run the payment extension&#39;s own <code>confirm()</code>. Online gateways render their own forms in a WebView.</li>
+</ul>
+</section>
+<section class="doc-section">
+<h2 id="3-repository-layout">3. Repository layout<a class="anchor-link" href="#3-repository-layout" aria-label="Link to this section">#</a></h2>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-plaintext">opencart-mobile-app/
+├── README.md                       Setup, API reference, release steps, known limits
+├── SECURITY.md                     Vulnerability reporting and production checklist
+├── CHANGELOG.md                    Release notes
+├── Makefile                        Common tasks (make help)
+├── .github/workflows/ci.yml        CI: app checks, PHP 8.0/8.3 lint, extension package
+├── .gitignore, .editorconfig, .gitattributes
+├── docs/
+│   ├── DEVELOPER.md                This guide (the source; edit this file)
+│   ├── developer-guide.html        Bootstrap web page built from it (build-html.cjs)
+│   ├── developer-guide.wordpress.xml  WordPress import (5 posts) built from it (build-wordpress.cjs)
+│   ├── readme-post.wordpress.xml   README.md as one WordPress post with GitHub links (build-readme-post.cjs)
+│   └── featured-images/            Featured images for the 5 posts (build.cjs, README.md)
+├── docker-compose.yml              Local dev store: web (PHP 8.3 + Apache) and db (MariaDB 11.4)
+├── docker/php/Dockerfile           PHP image with gd, mysqli, zip, curl
+├── docker/setup-store.sh           `make store`: downloads and installs OpenCart into store/
+├── docker/make-host-dynamic.php    Makes the dev store's URLs follow the request's Host header
+├── .env.example                    Template for .env: dev store passwords, STORE_BIND_ADDRESS (.env is not committed)
+├── store/                          OpenCart 4.1.0.4 install used for local testing (not committed)
+│
+├── opencart-extension/
+│   ├── build.sh                    Packages mobile_api/ into mobile_api.ocmod.zip
+│   └── mobile_api/                 Extension source (the folder name is the extension code)
+│       ├── install.json            Name, version and description shown in the Installer
+│       ├── system/library/
+│       │   └── api_controller.php  Base class for every endpoint
+│       ├── catalog/controller/
+│       │   ├── startup/mobile_api.php   Session, currency and CORS handling for API routes
+│       │   └── api/                     One file per resource (see §8.4)
+│       └── admin/
+│           ├── controller/module/mobile_api.php        Settings page, install and uninstall
+│           ├── language/en-gb/module/mobile_api.php    Admin texts
+│           └── view/template/module/mobile_api.twig    Settings form
+│
+└── mobile/                         Expo / React Native app
+    ├── App.tsx                     Entry: providers, error boundary, boot screen, theme, lazy navigator
+    ├── app.config.ts               Expo config: variants, bundle ids, iOS ATS (dev only), icon, splash, plugins
+    ├── eas.json                    EAS Build profiles: development, preview, production
+    ├── .env.example                Template for .env: EXPO_PUBLIC_STORE_URL, _API_KEY, _LANGUAGE
+    ├── package.json                Dependencies, scripts, Jest config
+    ├── eslint.config.js, .prettierrc.json
+    ├── tsconfig.json               TypeScript strict mode
+    ├── assets/                     icon.png, adaptive-icon.png, splash-icon.png
+    ├── scripts/build-icons.cjs     Regenerates the icon and splash images
+    └── src/
+        ├── config.ts               Store URL, API key, language from env + configProblem() check
+        ├── env.d.ts                Types for the build-time environment variables
+        ├── __tests__/              Jest unit tests (theme, config, API client)
+        ├── theme.ts                Colours, spacing, radius, font sizes, applyTheme()
+        ├── api/
+        │   ├── client.ts           fetch wrapper: headers, token storage, envelope, ApiError
+        │   ├── endpoints.ts        Typed function per endpoint (the `api` object)
+        │   └── types.ts            TypeScript types for every response
+        ├── context/StoreContext.tsx   Init data, customer, login/logout, currency
+        ├── hooks/                  useCart, useWishlist (shared React Query hooks)
+        ├── navigation/             RootNavigator (stack + tabs) and param types
+        ├── components/             Reusable UI (buttons, fields, product card, address form…)
+        ├── screens/                One file per screen (23 screens)
+        └── utils/errors.ts         Error message helpers</code></pre></div>
+</section>
+<section class="doc-section">
+<h2 id="4-languages">4. Languages<a class="anchor-link" href="#4-languages" aria-label="Link to this section">#</a></h2>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Language</th><th scope="col">Version</th><th scope="col">Where</th><th scope="col">Why</th></tr></thead><tbody><tr><td><strong>TypeScript</strong> (TSX)</td><td>~6.0 (see <code>mobile/package.json</code>), <code>strict: true</code></td><td>All app code in <code>mobile/</code></td><td>Catches mistakes at compile time, such as a wrong field name in an API response or a wrong navigation parameter. The API types in <code>src/api/types.ts</code> and the navigation types in <code>src/navigation/types.ts</code> make the compiler check every screen against the server contract.</td></tr>
+<tr><td><strong>PHP</strong></td><td>8.3 in the dev container (OpenCart 4.1.0.4 needs 8.0+)</td><td><code>opencart-extension/</code></td><td>OpenCart is written in PHP. An extension has to be PHP to run inside it and call its models. The code uses typed properties, <code>str_starts_with</code>, arrow functions and <code>hash_equals</code>.</td></tr>
+<tr><td><strong>Twig</strong></td><td>OpenCart&#39;s bundled version</td><td>Admin settings form</td><td>OpenCart&#39;s admin view layer.</td></tr>
+<tr><td><strong>JavaScript / jQuery</strong></td><td>Inside the Twig template</td><td>Admin colour pickers</td><td>The admin panel already loads jQuery and Bootstrap 5, so small scripts use them.</td></tr>
+<tr><td><strong>SQL</strong></td><td>MariaDB 11.4 / MySQL</td><td>Only through OpenCart models</td><td>The extension writes almost no SQL. It calls core models. The one exception is a <code>SHOW TABLES</code> check for the optional bestseller table.</td></tr>
+<tr><td><strong>YAML / Dockerfile / shell</strong></td><td>n/a</td><td><code>docker-compose.yml</code>, <code>docker/php/Dockerfile</code>, <code>build.sh</code></td><td>Local dev environment and packaging.</td></tr></tbody></table></div>
+</section>
+<section class="doc-section">
+<h2 id="5-tools-and-libraries-and-why-each-was-chosen">5. Tools and libraries, and why each was chosen<a class="anchor-link" href="#5-tools-and-libraries-and-why-each-was-chosen" aria-label="Link to this section">#</a></h2>
+<h3 id="51-mobile-app">5.1 Mobile app<a class="anchor-link" href="#51-mobile-app" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Package</th><th scope="col">Purpose</th><th scope="col">Why this one</th></tr></thead><tbody><tr><td><strong>expo</strong> (SDK 58)</td><td>Toolchain, native runtime, dev server, build service</td><td>See <a href="#6-why-expo">§6</a>.</td></tr>
+<tr><td><strong>react</strong> 19.3 / <strong>react-native</strong> 0.88</td><td>UI framework</td><td>One code base for iOS and Android with truly native views (not a web page in a wrapper). React is the most widely known UI model, so new developers ramp up fast. The versions are the ones SDK 58 pins; keep them in step with Expo (see §17).</td></tr>
+<tr><td><strong>@tanstack/react-query</strong> v5</td><td>Server-state cache: fetching, caching, refetching, pagination, mutations</td><td>Almost all app data is <em>server</em> state (catalog, cart, orders). React Query gives caching, deduplication, loading and error flags, pull-to-refresh, infinite scroll and cache updates after mutations, with no hand-written reducers. It replaces Redux for this kind of app.</td></tr>
+<tr><td><strong>@react-navigation/native</strong>, <strong>native-stack</strong>, <strong>bottom-tabs</strong> v7</td><td>Navigation</td><td>The standard for React Native. <code>native-stack</code> uses the platform&#39;s real navigation controllers (native swipe-back and modal sheets). Navigation parameters are fully typed.</td></tr>
+<tr><td><strong>react-native-screens</strong></td><td>Native screen containers</td><td>Required by native-stack. Keeps hidden screens out of the render tree to save memory.</td></tr>
+<tr><td><strong>react-native-safe-area-context</strong></td><td>Notch and home-indicator insets</td><td>Correct padding on every device. Required by React Navigation.</td></tr>
+<tr><td><strong>expo-secure-store</strong></td><td>Encrypted key-value storage</td><td>Holds the session token, which is effectively a login credential. It uses the iOS Keychain and Android Keystore, unlike AsyncStorage, which is plain text.</td></tr>
+<tr><td><strong>react-native-webview</strong></td><td>Embedded browser</td><td>Used for (1) store HTML such as product descriptions and information pages, and (2) the <strong>online payment page</strong>, so any OpenCart payment gateway works without writing native code for each one.</td></tr>
+<tr><td><strong>@expo/vector-icons</strong></td><td>Icon font (Ionicons)</td><td>Bundled with Expo. No image assets to manage.</td></tr>
+<tr><td><strong>expo-status-bar</strong></td><td>Status bar style</td><td>Switches light or dark icons to match the header colour.</td></tr>
+<tr><td><strong>expo-font</strong>, <strong>expo-asset</strong></td><td>Font and asset loading</td><td>Needed by the vector icons under SDK 58.</td></tr>
+<tr><td><strong>typescript</strong>, <strong>@types/react</strong></td><td>Type checking</td><td>See §4. <code>npm run typecheck</code> runs <code>tsc --noEmit</code>.</td></tr>
+<tr><td><strong>expo-splash-screen</strong></td><td>Splash screen</td><td>Configured in <code>app.config.ts</code>; shows the splash image until the app has loaded.</td></tr>
+<tr><td><strong>eslint</strong> + <strong>eslint-config-expo</strong>, <strong>prettier</strong></td><td>Lint and formatting</td><td>Expo&#39;s recommended rules, including the React Hooks rules (which caught several effects that copied server data into state). One formatting style for everyone.</td></tr>
+<tr><td><strong>jest</strong> + <strong>jest-expo</strong>, <strong>@types/jest</strong></td><td>Unit tests</td><td><code>jest-expo</code> mocks the native modules, so logic such as the colour maths and the API client can be tested in Node.</td></tr>
+<tr><td><strong>@babel/core</strong></td><td>Transpiler used by Metro</td><td>Required by Expo&#39;s bundler.</td></tr></tbody></table></div>
+<p>Deliberately <strong>not</strong> used:</p>
+<ul>
+<li><strong>Redux / Zustand.</strong> React Query plus one small Context covers it. Adding a global store would duplicate server state and invite stale data.</li>
+<li><strong>Axios.</strong> <code>fetch</code> is built in. All HTTP lives in one 150-line file (<code>client.ts</code>), so a library adds nothing.</li>
+<li><strong>A UI kit (NativeBase, Paper…).</strong> A small set of components in <code>components/ui.tsx</code> keeps the bundle small and the look fully under the store&#39;s control, including the admin-set colours.</li>
+<li><strong>Form libraries.</strong> Forms are small. <code>useState</code> plus field errors from the server is enough, and the server is the source of truth for validation.</li>
+</ul>
+<h3 id="52-backend-and-dev-environment">5.2 Backend and dev environment<a class="anchor-link" href="#52-backend-and-dev-environment" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Tool</th><th scope="col">Purpose</th><th scope="col">Why</th></tr></thead><tbody><tr><td><strong>OpenCart 4.1.0.4 extension system</strong></td><td>Packaging and install</td><td>Installs through the admin UI with no core file edits, so OpenCart upgrades don&#39;t overwrite it. Uninstalling removes it cleanly.</td></tr>
+<tr><td><strong>OpenCart startup actions</strong></td><td>Run code on every catalog request</td><td>The supported hook point for swapping the session before controllers run (see §8.3). No core edits.</td></tr>
+<tr><td><strong>Docker Compose</strong> (php:8.3-apache, mariadb:11.4)</td><td>Local store</td><td>The same environment on every machine. The store runs on port 8090 because 8080, 8081 and 3307 were already taken on the original dev machine.</td></tr>
+<tr><td><strong>zip</strong> (<code>build.sh</code>)</td><td>Packaging</td><td>OpenCart&#39;s installer expects a <code>.ocmod.zip</code> whose contents sit at the root. The zip&#39;s file name becomes the extension code.</td></tr></tbody></table></div>
+</section>
+<section class="doc-section">
+<h2 id="6-why-expo">6. Why Expo<a class="anchor-link" href="#6-why-expo" aria-label="Link to this section">#</a></h2>
+<p>Expo is a framework and toolchain on top of React Native. For this project it was the right choice for these reasons:</p>
+<ol>
+<li><strong>No native toolchain to start.</strong> You can develop on a real phone with only Node.js and the free <strong>Expo Go</strong> app: run <code>npx expo start</code> and scan the QR code. No Xcode or Android Studio is needed until you make a store build. Backend developers who mostly know PHP can still run and debug the app.</li>
+<li><strong>One code base, both platforms, plus web.</strong> The same TypeScript runs on iOS and Android. <code>npx expo start --web</code> runs it in a browser, which is handy for quick API debugging. <code>client.ts</code> and <code>PaymentScreen</code> include small web fallbacks.</li>
+<li><strong>Versioned, tested native modules.</strong> Each SDK release pins versions of React Native and its modules (SecureStore, WebView, screens…) that are tested together. <code>npx expo install &lt;pkg&gt;</code> picks the matching version, which avoids the usual native dependency conflicts.</li>
+<li><strong>Cloud builds and store submission (EAS).</strong> <code>eas build</code> produces signed <code>.ipa</code> and <code>.aab</code> files on Expo&#39;s servers, so you don&#39;t need a Mac for iOS builds. <code>eas submit</code> uploads them to the stores.</li>
+<li><strong>Over-the-air updates (EAS Update).</strong> You can push JavaScript-only fixes, such as a text change or a bug in a screen, to installed apps without a store review. Native changes still need a new build.</li>
+<li><strong>Config plugins instead of editing native projects.</strong> Native settings, such as iOS App Transport Security (<code>NSAllowsLocalNetworking</code>) or the SecureStore setup, are declared in <code>app.config.ts</code>. Expo generates the iOS and Android projects (<code>expo prebuild</code>), so there are no <code>ios/</code> or <code>android/</code> folders to maintain.</li>
+<li><strong>Fast iteration.</strong> Fast Refresh keeps app state while you edit. <code>npx expo start -c</code> clears the bundler cache when things get confused.</li>
+</ol>
+<p>Trade-offs to know about:</p>
+<ul>
+<li><strong>Expo Go supports only the newest SDK.</strong> That is why the project was upgraded to SDK 58: the App Store version of Expo Go showed &quot;No usable data&quot; for an older SDK QR code. If you add a library with custom native code that isn&#39;t in Expo Go, switch to a <strong>development build</strong> (<code>npx expo run:ios</code> or <code>eas build --profile development</code>).</li>
+<li>You follow Expo&#39;s upgrade cadence (about three SDKs a year). See §17 for how to upgrade.</li>
+</ul>
+</section>
+<section class="doc-section">
+<h2 id="7-development-environment">7. Development environment<a class="anchor-link" href="#7-development-environment" aria-label="Link to this section">#</a></h2>
+<h3 id="71-prerequisites">7.1 Prerequisites<a class="anchor-link" href="#71-prerequisites" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Node.js 20 or newer</strong> (the project has been run with Node 26).</li>
+<li><strong>Docker Desktop</strong>, for the local store.</li>
+<li><strong>Expo Go</strong> on your phone, or Xcode (iOS Simulator) or Android Studio (emulator).</li>
+<li>The phone and computer on the <strong>same Wi-Fi network</strong>.</li>
+</ul>
+<h3 id="72-start-the-store">7.2 Start the store<a class="anchor-link" href="#72-start-the-store" aria-label="Link to this section">#</a></h3>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-bash">cd opencart-mobile-app
+cp .env.example .env                 # set the passwords
+make store                           # first time only: downloads OpenCart 4.1.0.4 into store/ and installs it
+docker compose up -d                 # later: start it (web on :8090, db internal only)
+open http://localhost:8090/          # storefront
+open http://localhost:8090/admin/    # admin (credentials in .env)</code></pre></div>
+<p><code>make store</code> runs <code>docker/make-host-dynamic.php</code>, so <code>store/config.php</code> and <code>store/admin/config.php</code> build <code>HTTP_SERVER</code> from the request&#39;s <code>Host</code> header. The same store therefore works at <code>localhost:8090</code> on your computer and at <code>&lt;your LAN IP&gt;:8090</code> from the phone, and image URLs always point at an address the client can reach.</p>
+<p>The port is bound to <code>${STORE_BIND_ADDRESS:-127.0.0.1}</code>, so by default only this computer can reach the store. To test on a real phone, set <code>STORE_BIND_ADDRESS=0.0.0.0</code> in <code>.env</code> and run <code>docker compose up -d</code> again. <strong>Anyone on your Wi-Fi can then open the dev store and its admin</strong>, so don&#39;t do this on a public network.</p>
+<h3 id="73-start-the-app">7.3 Start the app<a class="anchor-link" href="#73-start-the-app" aria-label="Link to this section">#</a></h3>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-bash">cd mobile
+npm ci
+cp .env.example .env     # then edit it (below)
+npx expo start -c        # -c clears the Metro cache; use it after changing .env or dependencies</code></pre></div>
+<p>Scan the QR code with the iPhone Camera (it opens Expo Go) or from inside Expo Go on Android.</p>
+<p>In <code>mobile/.env</code>, set <code>EXPO_PUBLIC_STORE_URL</code> to your computer&#39;s LAN IP, e.g. <code>http://192.168.0.10:8090/</code>. Find it with <code>ipconfig getifaddr en0</code> on macOS. <strong><code>localhost</code> on a phone means the phone itself.</strong> For the Android emulator use <code>http://10.0.2.2:8090/</code>. Set <code>EXPO_PUBLIC_API_KEY</code> to the key on the module settings page. If either is missing or invalid, the app&#39;s start screen says which one.</p>
+<h3 id="74-useful-commands">7.4 Useful commands<a class="anchor-link" href="#74-useful-commands" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Command</th><th scope="col">Where</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>make help</code></td><td>root</td><td>Lists the Makefile tasks (<code>up</code>, <code>down</code>, <code>extension</code>, <code>php-lint</code>, <code>mobile-check</code>, <code>docs</code>, <code>check</code>…)</td></tr>
+<tr><td><code>make check</code></td><td>root</td><td>Everything CI runs: PHP lint (in Docker) and the app checks</td></tr>
+<tr><td><code>npm run check</code></td><td><code>mobile/</code></td><td>Type-check, lint, format check and unit tests</td></tr>
+<tr><td><code>npm run typecheck</code> / <code>lint</code> / <code>format</code> / <code>test</code></td><td><code>mobile/</code></td><td>The individual steps</td></tr>
+<tr><td><code>npx expo start -c</code></td><td><code>mobile/</code></td><td>Dev server with a clean cache</td></tr>
+<tr><td><code>npx expo export --platform ios</code></td><td><code>mobile/</code></td><td>Builds a production JS bundle; a quick way to catch bundling errors</td></tr>
+<tr><td><code>npx expo-doctor</code></td><td><code>mobile/</code></td><td>Checks dependency versions against the SDK</td></tr>
+<tr><td><code>make extension</code></td><td>root</td><td>Lints the PHP and builds <code>mobile_api.ocmod.zip</code> (the zip is not committed)</td></tr>
+<tr><td><code>make docs</code></td><td>root</td><td>Rebuilds the HTML guide and the WordPress import (the import needs Chrome for the diagrams)</td></tr>
+<tr><td><code>docker compose exec web php -l extension/mobile_api/&lt;file&gt;</code></td><td>root</td><td>PHP syntax check inside the container</td></tr>
+<tr><td><code>docker compose logs -f web</code></td><td>root</td><td>Apache and PHP errors</td></tr></tbody></table></div>
+<h3 id="75-editing-the-extension-locally">7.5 Editing the extension locally<a class="anchor-link" href="#75-editing-the-extension-locally" aria-label="Link to this section">#</a></h3>
+<p>The source of truth is <code>opencart-extension/mobile_api/</code>. The running store uses its installed copy in <code>store/extension/mobile_api/</code>. After editing, either copy the changed file across:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-bash">cp opencart-extension/mobile_api/catalog/controller/api/cart.php store/extension/mobile_api/catalog/controller/api/cart.php</code></pre></div>
+<p>…or rebuild the zip and reinstall it through the admin. <strong>Reinstalling resets the module settings, including the API key</strong>, so the copy approach is faster during development. Always commit the source folder, not the <code>store/</code> copy.</p>
+</section>
+<section class="doc-section">
+<h2 id="8-the-backend-the-mobile_api-opencart-extension">8. The backend: the <code>mobile_api</code> OpenCart extension<a class="anchor-link" href="#8-the-backend-the-mobile_api-opencart-extension" aria-label="Link to this section">#</a></h2>
+<h3 id="81-how-a-request-reaches-an-endpoint">8.1 How a request reaches an endpoint<a class="anchor-link" href="#81-how-a-request-reaches-an-endpoint" aria-label="Link to this section">#</a></h3>
+<p>The app calls URLs such as:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-plaintext">GET  {baseUrl}index.php?route=extension/mobile_api/api/product.info&amp;product_id=40&amp;language=en-gb&amp;currency=USD
+POST {baseUrl}index.php?route=extension/mobile_api/api/cart.add      (JSON body)
+Headers: X-Api-Key: &lt;key&gt;   X-Session-Token: &lt;token&gt;   Content-Type: application/json</code></pre></div>
+<p>OpenCart&#39;s router maps <code>extension/mobile_api/api/product.info</code> to the class <code>Opencart\Catalog\Controller\Extension\MobileApi\Api\Product</code> in <code>extension/mobile_api/catalog/controller/api/product.php</code>, and calls its <code>info()</code> method. The part after the dot is the method name.</p>
+<div class="diagram card card-body mb-4"><pre class="mermaid" data-src="sequenceDiagram
+  participant App
+  participant FC as OpenCart front controller
+  participant SU as startup/mobile_api
+  participant C as API controller
+  participant B as ApiController (base)
+  participant M as Core models
+
+  App-&gt;&gt;FC: HTTP request with headers
+  FC-&gt;&gt;FC: Core startups (settings, session with a NEW id, customer, currency, tax, cart)
+  FC-&gt;&gt;SU: Startup action (registered on install)
+  SU-&gt;&gt;SU: Route starts with extension/mobile_api/api/? Module enabled?
+  SU-&gt;&gt;SU: Send CORS headers (if configured), answer OPTIONS with 204
+  SU-&gt;&gt;SU: session-&gt;start(X-Session-Token) if valid and different
+  SU-&gt;&gt;SU: ?currency=XXX → session currency
+  SU-&gt;&gt;FC: Re-run startup/customer, currency, tax, then a new Cart object
+  FC-&gt;&gt;C: Call method, e.g. Cart::add()
+  C-&gt;&gt;B: guard(): enabled? API key matches (hash_equals)? Parse JSON body
+  C-&gt;&gt;M: Core logic (api/cart.addProduct, model_checkout_order…)
+  C-&gt;&gt;B: ok($data) or fail($msg, $errors, $status)
+  B--&gt;&gt;App: JSON envelope + X-Session-Token + Cache-Control: no-store">sequenceDiagram
+  participant App
+  participant FC as OpenCart front controller
+  participant SU as startup/mobile_api
+  participant C as API controller
+  participant B as ApiController (base)
+  participant M as Core models
+
+  App-&gt;&gt;FC: HTTP request with headers
+  FC-&gt;&gt;FC: Core startups (settings, session with a NEW id, customer, currency, tax, cart)
+  FC-&gt;&gt;SU: Startup action (registered on install)
+  SU-&gt;&gt;SU: Route starts with extension/mobile_api/api/? Module enabled?
+  SU-&gt;&gt;SU: Send CORS headers (if configured), answer OPTIONS with 204
+  SU-&gt;&gt;SU: session-&gt;start(X-Session-Token) if valid and different
+  SU-&gt;&gt;SU: ?currency=XXX → session currency
+  SU-&gt;&gt;FC: Re-run startup/customer, currency, tax, then a new Cart object
+  FC-&gt;&gt;C: Call method, e.g. Cart::add()
+  C-&gt;&gt;B: guard(): enabled? API key matches (hash_equals)? Parse JSON body
+  C-&gt;&gt;M: Core logic (api/cart.addProduct, model_checkout_order…)
+  C-&gt;&gt;B: ok($data) or fail($msg, $errors, $status)
+  B--&gt;&gt;App: JSON envelope + X-Session-Token + Cache-Control: no-store</pre></div>
+<h3 id="82-the-base-class-systemlibraryapi_controllerphp">8.2 The base class: <code>system/library/api_controller.php</code><a class="anchor-link" href="#82-the-base-class-systemlibraryapi_controllerphp" aria-label="Link to this section">#</a></h3>
+<p>Every endpoint class extends <code>Opencart\System\Library\Extension\MobileApi\ApiController</code>. It provides:</p>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Method</th><th scope="col">What it does</th></tr></thead><tbody><tr><td><code>guard(): bool</code></td><td>Must be the first call in every public method. Fails with <strong>503</strong> if the module is disabled and <strong>401</strong> if <code>X-Api-Key</code> doesn&#39;t match, using constant-time <code>hash_equals</code>. Then it merges a JSON body into <code>$this-&gt;request-&gt;post</code>.</td></tr>
+<tr><td><code>guardCustomer(): bool</code></td><td><code>guard()</code>, plus <strong>401</strong> &quot;Please log in to continue.&quot; when no customer is logged in. Used by account, address and order endpoints.</td></tr>
+<tr><td><code>parseJsonBody()</code></td><td>Reads <code>php://input</code> when <code>Content-Type</code> is <code>application/json</code> and runs it through <code>$this-&gt;request-&gt;clean()</code>, the same HTML escaping OpenCart applies to form posts. Core code that reads <code>$this-&gt;request-&gt;post</code> then works unchanged.</td></tr>
+<tr><td><code>post($key, $default)</code>, <code>query($key, $default)</code></td><td>Read POST or GET values.</td></tr>
+<tr><td><code>ok(array $data, string $message = &#39;&#39;)</code></td><td>Sends <code>{&quot;success&quot;:true,&quot;data&quot;:{…},&quot;message&quot;:&quot;…&quot;}</code>. An empty array is sent as <code>{}</code>, so clients always get an object.</td></tr>
+<tr><td><code>fail(string $message, array $errors = [], int $status = 400)</code></td><td>Sets the HTTP status and sends <code>{&quot;success&quot;:false,&quot;error&quot;:&quot;…&quot;,&quot;errors&quot;:{&quot;field&quot;:&quot;message&quot;}}</code>.</td></tr>
+<tr><td><code>output()</code> (private)</td><td>Adds <code>Content-Type: application/json</code>, <code>Cache-Control: no-store</code> and <strong><code>X-Session-Token</code></strong> (the session actually used) to every response.</td></tr>
+<tr><td><code>decode($s)</code>, <code>t($key)</code></td><td>OpenCart stores text HTML-escaped (<code>&amp;amp;</code>). Native clients need plain text, so every outgoing string is decoded. <code>t()</code> reads a language key and decodes it.</td></tr>
+<tr><td><code>canSeePrice()</code></td><td>False when &quot;Login to see prices&quot; (<code>config_customer_price</code>) is on and nobody is logged in. Every price output respects it.</td></tr>
+<tr><td><code>formatPrice($value, $tax_class_id)</code></td><td>Adds tax according to the store&#39;s display setting and formats it in the session currency.</td></tr>
+<tr><td><code>image($path, $w, $h)</code></td><td>Absolute URL of a resized image (cached by OpenCart), or the placeholder image. The default size comes from the module settings.</td></tr>
+<tr><td><code>productCard($row)</code></td><td>The single compact product shape used by <strong>every</strong> list: home, category, search, wishlist and related products.</td></tr>
+<tr><td><code>validateAddress()</code>, <code>buildSessionAddress()</code>, <code>addressPayload()</code></td><td>Shared address rules (the same as <code>account/address</code>), the address array that checkout keeps in the session, and the address shape sent to the client.</td></tr></tbody></table></div>
+<p><strong>Response envelope</strong></p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-json">// success
+{ &quot;success&quot;: true, &quot;data&quot;: { &quot;cart&quot;: &quot;…&quot; }, &quot;message&quot;: &quot;Success: You have added …&quot; }
+
+// failure (HTTP 4xx/5xx)
+{ &quot;success&quot;: false, &quot;error&quot;: &quot;E-Mail Address does not appear to be valid!&quot;,
+  &quot;errors&quot;: { &quot;email&quot;: &quot;E-Mail Address does not appear to be valid!&quot;, &quot;telephone&quot;: &quot;…&quot; } }</code></pre></div>
+<p>Status codes used: <code>400</code> bad request, <code>401</code> bad key or not logged in, <code>403</code> not allowed (disabled feature, 2FA on, account not approved), <code>404</code> not found, <code>409</code> conflict (empty cart, already logged in), <code>422</code> validation errors, <code>429</code> too many login attempts, <code>500</code> order creation failed, <code>503</code> API disabled.</p>
+<h3 id="83-the-startup-catalogcontrollerstartupmobile_apiphp">8.3 The startup: <code>catalog/controller/startup/mobile_api.php</code><a class="anchor-link" href="#83-the-startup-catalogcontrollerstartupmobile_apiphp" aria-label="Link to this section">#</a></h3>
+<p><strong>Why it exists.</strong> When a request arrives, OpenCart&#39;s core startups have already started a session from the <code>OCSESSID</code> cookie. A phone sends no cookie, so that would be a brand-new, empty session on every request: no cart and no login. The startup fixes this by reopening the session the app asks for.</p>
+<p><strong>What it does, in order</strong> (and only for routes starting with <code>extension/mobile_api/api/</code>):</p>
+<ol>
+<li>Returns early if the module is disabled.</li>
+<li>Sends CORS headers if a <strong>CORS Origin</strong> is configured. This is only needed for Expo web. It answers <code>OPTIONS</code> preflight requests with <code>204</code>.</li>
+<li>Takes the token from <code>X-Session-Token</code>. For <code>checkout.pay</code> only, it takes it from the <code>session_token</code> query parameter instead, because a WebView&#39;s first page load can&#39;t send custom headers.</li>
+<li>If the token matches <code>^[a-zA-Z0-9]{26,52}$</code> and differs from the current id, it calls <code>$this-&gt;session-&gt;start($token)</code>.</li>
+<li>If <code>?currency=</code> is a valid enabled currency, it stores it in the session.</li>
+<li>If anything changed, it re-runs <code>startup/customer</code>, <code>startup/currency</code> and <code>startup/tax</code> (the same order as <code>system/config/catalog.php</code>) and replaces the <code>cart</code> object. The logged-in customer, currency and tax rates then match the restored session.</li>
+</ol>
+<p>The startup is registered by <code>install()</code> in the admin controller and removed by <code>uninstall()</code>. You can see it under <strong>System → Settings → Startups</strong> (code <code>mobile_api</code>).</p>
+<h3 id="84-endpoint-files">8.4 Endpoint files<a class="anchor-link" href="#84-endpoint-files" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">File</th><th scope="col">Methods</th><th scope="col">Auth</th></tr></thead><tbody><tr><td><code>common.php</code></td><td><code>init</code>: store info, theme colours, settings, currencies, languages, customer, session token</td><td>key</td></tr>
+<tr><td><code>catalog.php</code></td><td><code>home</code>, <code>categories</code>, <code>category</code>, <code>manufacturers</code>, <code>informations</code>, <code>information</code></td><td>key</td></tr>
+<tr><td><code>product.php</code></td><td><code>index</code> (list, search, filter, sort, paginate), <code>info</code> (full detail), <code>reviews</code>, <code>review</code> (write)</td><td>key</td></tr>
+<tr><td><code>cart.php</code></td><td><code>index</code>, <code>add</code>, <code>edit</code>, <code>remove</code>, <code>clear</code>, <code>coupon</code></td><td>key</td></tr>
+<tr><td><code>wishlist.php</code></td><td><code>index</code>, <code>add</code>, <code>remove</code> (session list for guests, database for customers)</td><td>key</td></tr>
+<tr><td><code>account.php</code></td><td><code>login</code>, <code>logout</code>, <code>register</code>, <code>forgotten</code>, <code>profile</code>, <code>edit</code>, <code>password</code>, <code>newsletter</code></td><td>key; profile, edit, password and newsletter need login</td></tr>
+<tr><td><code>address.php</code></td><td><code>index</code>, <code>save</code> (create or update), <code>delete</code></td><td>login</td></tr>
+<tr><td><code>order.php</code></td><td><code>index</code>, <code>info</code>, <code>reorder</code></td><td>login</td></tr>
+<tr><td><code>localisation.php</code></td><td><code>countries</code>, <code>zones</code></td><td>key</td></tr>
+<tr><td><code>checkout.php</code></td><td><code>index</code>, <code>guest</code>, <code>shippingAddress</code>, <code>paymentAddress</code>, <code>shippingMethods</code>, <code>shippingMethod</code>, <code>paymentMethods</code>, <code>paymentMethod</code>, <code>confirm</code>, <code>pay</code> (HTML), <code>complete</code></td><td>key; checkout steps need a customer (logged in or guest) in the session</td></tr></tbody></table></div>
+<p>The full parameter list is in the README&#39;s <strong>API reference</strong>.</p>
+<h3 id="85-the-admin-module-admincontrollermodulemobile_apiphp">8.5 The admin module: <code>admin/controller/module/mobile_api.php</code><a class="anchor-link" href="#85-the-admin-module-admincontrollermodulemobile_apiphp" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><code>index()</code> renders the settings form (<code>mobile_api.twig</code>). It generates a 40-character API key if none exists and shows the API base URL for testing.</li>
+<li><code>save()</code> checks permission, validates the key (<code>^[a-zA-Z0-9]{20,64}$</code>) and each colour (<code>^#[0-9a-fA-F]{6}$</code> or empty), normalises the featured product IDs, and saves everything under the setting code <code>module_mobile_api</code>. <strong><code>editSetting</code> replaces the whole group</strong>, so every field must be posted together. The form already does this.</li>
+<li><code>install()</code> registers the startup and writes default settings (status off and a random key).</li>
+<li><code>uninstall()</code> removes the startup and all <code>module_mobile_api_*</code> settings.</li>
+</ul>
+<p>Errors are returned as <code>{&quot;error&quot;: {&quot;color_primary&quot;: &quot;…&quot;}}</code>. OpenCart&#39;s admin JavaScript highlights <code>#input-color-primary</code> and fills <code>#error-color-primary</code> (underscores become dashes).</p>
+</section>
+<section class="doc-section">
+<h2 id="9-the-mobile-app">9. The mobile app<a class="anchor-link" href="#9-the-mobile-app" aria-label="Link to this section">#</a></h2>
+<h3 id="91-layers">9.1 Layers<a class="anchor-link" href="#91-layers" aria-label="Link to this section">#</a></h3>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-plaintext">Screens (src/screens)          what the user sees; compose components; call hooks
+   │
+Components (src/components)    reusable UI: Button, TextField, ProductCard, AddressForm, …
+   │
+Hooks + Context                React Query hooks (useCart, useWishlist, inline useQuery/useMutation)
+   │                           StoreContext (init data, customer, login/logout, currency)
+Endpoints (src/api/endpoints)  one typed function per server endpoint
+   │
+Client (src/api/client)        fetch, headers, token storage, envelope unwrap, ApiError</code></pre></div>
+<p>Rules that keep this clean:</p>
+<ul>
+<li><strong>Screens never call <code>fetch</code>.</strong> They call <code>api.*</code> through React Query.</li>
+<li><strong>Only <code>client.ts</code> knows about headers, tokens and the envelope.</strong></li>
+<li><strong>Types live in <code>api/types.ts</code></strong> and mirror the PHP output exactly. Change both together.</li>
+</ul>
+<h3 id="92-start-up-sequence-apptsx">9.2 Start-up sequence (<code>App.tsx</code>)<a class="anchor-link" href="#92-start-up-sequence-apptsx" aria-label="Link to this section">#</a></h3>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-plaintext">App
+└─ SafeAreaProvider
+   └─ QueryClientProvider        (staleTime 60 s, retry 1)
+      └─ ErrorBoundary           crash screen with &quot;Try again&quot; instead of a blank app
+         └─ StoreProvider        calls api.common.init() once on mount
+            └─ Bootstrap
+                loading  → BootScreen (spinner)
+                error    → BootScreen (message + Try again → reload())
+                ready    → loadNavigator(init.theme):
+                             applyTheme(init.theme)
+                             require('./src/navigation/RootNavigator')   ← loaded only now
+                           &lt;NavigationContainer theme={navTheme}&gt;
+                             &lt;StatusBar style=light|dark /&gt;
+                             &lt;RootNavigator/&gt;</code></pre></div>
+<p><strong>Why the navigator is <code>require()</code>d late:</strong> each screen builds its styles with <code>StyleSheet.create()</code> when its module first loads, and that copies the colour values at that moment. The store&#39;s colours must be in <code>colors</code> <em>before</em> any screen module loads. <code>App.tsx</code> therefore deliberately imports nothing that creates styles; even the boot screen uses inline styles. <strong>Don&#39;t add imports of screens or components to <code>App.tsx</code>.</strong> The side effect is that a colour change in the admin shows up on the next app launch, not live.</p>
+<h3 id="93-api-client-srcapiclientts">9.3 API client (<code>src/api/client.ts</code>)<a class="anchor-link" href="#93-api-client-srcapiclientts" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong><code>request&lt;T&gt;(route, {method, query, body})</code></strong> is the only way the app talks to the server.<ul>
+<li>Adds <code>Accept</code>, <code>X-Api-Key</code>, <code>X-Session-Token</code> (if one is stored) and <code>Content-Type: application/json</code> for POST.</li>
+<li>Builds the URL with <code>buildUrl()</code>: <code>route=extension/mobile_api/api/&lt;route&gt;</code>, <code>language</code>, the stored <code>currency</code>, and any query parameters (empty values are dropped).</li>
+<li>Sends <code>credentials: &#39;omit&#39;</code>, so no cookies are used; the header is the only session carrier.</li>
+<li>Aborts a request after <strong>20 seconds</strong> with &quot;The store is taking too long to respond&quot;, so a dead connection never leaves a spinner forever.</li>
+<li>Refuses to send anything while <code>configProblem()</code> reports a missing or invalid store URL or API key, and throws that message instead. The boot screen shows it.</li>
+<li><strong>Reads <code>X-Session-Token</code> from every response</strong> and stores it if it changed. This is how a new install gets its first session, and how it recovers when the server&#39;s session expired and a new one was created.</li>
+<li>Unwraps the envelope. On <code>success:false</code> it throws <strong><code>ApiError(message, status, errors)</code></strong>. A network failure becomes <code>ApiError(…, 0)</code>. A non-JSON response (a PHP error, or the extension not installed) gets a helpful message.</li>
+</ul>
+</li>
+<li><strong>Storage:</strong> <code>expo-secure-store</code> on device, <code>localStorage</code> on web. Keys are <code>oc_session_token</code> and <code>oc_currency</code>. The values are loaded once (<code>ensureLoaded</code>) and then kept in memory.</li>
+</ul>
+<h3 id="94-endpoints-and-types">9.4 Endpoints and types<a class="anchor-link" href="#94-endpoints-and-types" aria-label="Link to this section">#</a></h3>
+<p><code>src/api/endpoints.ts</code> exports one object:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-typescript">api.cart.add({ product_id: 40, quantity: 1, option: { 218: '5' } })  // Promise&lt;Cart&gt;
+api.checkout.confirm({ comment: '', agree: true })                  // Promise&lt;ConfirmResult&gt;</code></pre></div>
+<p>Grouping by resource mirrors the PHP files, so <code>api.cart.*</code> maps to <code>cart.php</code>. The return types come from <code>src/api/types.ts</code>.</p>
+<h3 id="95-state-management">9.5 State management<a class="anchor-link" href="#95-state-management" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Kind of state</th><th scope="col">Where it lives</th><th scope="col">Examples</th></tr></thead><tbody><tr><td><strong>Server state</strong> (the large majority)</td><td>React Query cache</td><td>catalog, product, cart, wishlist, orders, addresses, checkout state</td></tr>
+<tr><td><strong>App-wide session state</strong></td><td><code>StoreContext</code></td><td><code>init</code> (store, settings, currencies, theme), <code>customer</code>, <code>isLoggedIn</code>, <code>login()</code>, <code>logout()</code>, <code>changeCurrency()</code>, <code>reload()</code></td></tr>
+<tr><td><strong>Screen-local UI state</strong></td><td><code>useState</code></td><td>form fields, selected options, quantity, search text, image carousel index</td></tr>
+<tr><td><strong>Persisted</strong></td><td>SecureStore</td><td>session token, currency</td></tr></tbody></table></div>
+<p><strong>Query keys in use</strong> (keep new ones consistent):</p>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Key</th><th scope="col">Data</th></tr></thead><tbody><tr><td><code>[&#39;home&#39;]</code></td><td>Home sections</td></tr>
+<tr><td><code>[&#39;categories&#39;, parentId]</code>, <code>[&#39;category&#39;, id]</code></td><td>Category tree and details</td></tr>
+<tr><td><code>[&#39;products&#39;, query]</code></td><td>Product lists (infinite)</td></tr>
+<tr><td><code>[&#39;product&#39;, id]</code></td><td>Product details</td></tr>
+<tr><td><code>[&#39;reviews&#39;, productId]</code></td><td>Reviews (infinite)</td></tr>
+<tr><td><code>[&#39;cart&#39;]</code> (<code>cartKey</code>)</td><td>Cart</td></tr>
+<tr><td><code>[&#39;wishlist&#39;]</code> (<code>wishlistKey</code>)</td><td>Wishlist</td></tr>
+<tr><td><code>[&#39;profile&#39;]</code>, <code>[&#39;addresses&#39;]</code>, <code>[&#39;orders&#39;]</code>, <code>[&#39;order&#39;, id]</code></td><td>Account</td></tr>
+<tr><td><code>[&#39;countries&#39;]</code>, <code>[&#39;zones&#39;, countryId]</code></td><td>Localisation (<code>staleTime: Infinity</code>)</td></tr>
+<tr><td><code>[&#39;informations&#39;]</code>, <code>[&#39;information&#39;, id]</code></td><td>Information pages</td></tr>
+<tr><td><code>[&#39;checkout&#39;, &#39;state&#39;]</code>, <code>[&#39;checkout&#39;, &#39;shipping&#39;, addr]</code>, <code>[&#39;checkout&#39;, &#39;payment&#39;, method, addr]</code></td><td>Checkout</td></tr></tbody></table></div>
+<p><strong>Cache rules used across the app:</strong></p>
+<ul>
+<li>Mutations that return the full cart (<code>add</code>, <code>edit</code>, <code>remove</code>, <code>coupon</code>) <strong>write the response straight into <code>[&#39;cart&#39;]</code></strong> with <code>setQueryData</code>. There&#39;s no extra refetch, and the tab badge updates instantly. They also invalidate <code>[&#39;checkout&#39;]</code>, because the totals changed.</li>
+<li>After <strong>login</strong>, <code>queryClient.invalidateQueries()</code> refetches everything, because prices, cart (merged with the account cart) and wishlist can all change.</li>
+<li>After <strong>logout</strong>, <code>queryClient.clear()</code> drops all cached data, so nothing from the previous customer stays visible.</li>
+<li>After <strong>currency change</strong>, init reloads and everything is invalidated, so prices refetch in the new currency.</li>
+<li>After an <strong>order is placed</strong>, <code>[&#39;cart&#39;]</code> is invalidated and every <code>[&#39;checkout&#39;, …]</code> query is removed.</li>
+</ul>
+<h3 id="96-navigation">9.6 Navigation<a class="anchor-link" href="#96-navigation" aria-label="Link to this section">#</a></h3>
+<p><code>src/navigation/RootNavigator.tsx</code>:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-plaintext">Stack (native-stack)
+├─ Tabs (bottom-tabs, header hidden on the stack)
+│   ├─ Home         (own header inside the screen)
+│   ├─ Categories
+│   ├─ Cart         (badge: cart count)
+│   ├─ Wishlist     (badge: wishlist count)
+│   └─ Account
+├─ Product, ProductList, Search, Reviews
+├─ WriteReview, Login, Register              (presentation: 'modal')
+├─ ForgotPassword
+├─ Checkout, Payment (no swipe-back), OrderSuccess (no back)
+├─ Orders, OrderDetail, Addresses, AddressEdit, EditProfile, ChangePassword
+└─ Information</code></pre></div>
+<p>Every route&#39;s parameters are typed in <code>src/navigation/types.ts</code> (<code>RootStackParamList</code>, <code>TabParamList</code>). Screens get typed props with <code>NativeStackScreenProps&lt;RootStackParamList, &#39;Product&#39;&gt;</code>. Components use <code>useNavigation&lt;NativeStackNavigationProp&lt;RootStackParamList&gt;&gt;()</code>. A typo in a route name or a missing parameter fails <code>tsc</code>.</p>
+<p>Header and tab bar colours come from <code>colors.tertiary</code> and <code>colors.onTertiary</code>. The active tab uses <code>colors.primary</code> (white on a dark tertiary).</p>
+<h3 id="97-theme-srcthemets">9.7 Theme (<code>src/theme.ts</code>)<a class="anchor-link" href="#97-theme-srcthemets" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><code>colors</code>, <code>spacing</code>, <code>radius</code> and <code>font</code> are the only places style constants should come from. Don&#39;t hard-code hex values in screens.</li>
+<li><code>applyTheme(init.theme)</code> overrides colours from the admin and derives the rest:</li>
+</ul>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Admin setting</th><th scope="col"><code>colors</code> fields set</th><th scope="col">Derived</th></tr></thead><tbody><tr><td>Primary</td><td><code>primary</code></td><td><code>primaryDark</code> (25 % black), <code>primarySoft</code> (90 % white), <code>onPrimary</code> (contrast text)</td></tr>
+<tr><td>Secondary</td><td><code>secondary</code></td><td><code>onSecondary</code></td></tr>
+<tr><td>Tertiary</td><td><code>tertiary</code></td><td><code>onTertiary</code>, <code>tertiaryIsDark</code> (controls the status bar style)</td></tr>
+<tr><td>Font</td><td><code>text</code></td><td><code>textMuted</code> (35 % lighter); also <code>onTertiary</code> on light headers</td></tr>
+<tr><td>Button</td><td><code>button</code> (falls back to <code>primary</code>)</td><td>n/a</td></tr>
+<tr><td>Button text</td><td><code>onButton</code> (falls back to automatic contrast)</td><td>n/a</td></tr></tbody></table></div>
+<p>The contrast choice (<code>readableOn</code>) uses the WCAG relative-luminance formula and picks whichever of white or near-black has the higher contrast ratio. <code>accent</code> (red) is reserved for errors and destructive actions and <strong>can&#39;t</strong> be changed from the admin, so errors always look like errors.</p>
+<h3 id="98-components-srccomponents">9.8 Components (<code>src/components</code>)<a class="anchor-link" href="#98-components-srccomponents" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Component</th><th scope="col">Use</th></tr></thead><tbody><tr><td><code>ui.tsx</code></td><td><code>Button</code> (variants: primary, secondary, outline, ghost, danger; <code>loading</code>, <code>icon</code>, <code>small</code>), <code>TextField</code> (label, error), <code>Card</code>, <code>Row</code>, <code>SectionHeader</code>, <code>Chip</code>, <code>Checkbox</code>, <code>RadioRow</code>, <code>ListItem</code>, <code>Badge</code></td></tr>
+<tr><td><code>States.tsx</code></td><td><code>Loading</code>, <code>ErrorState</code> (with retry), <code>EmptyState</code> (with action)</td></tr>
+<tr><td><code>Price.tsx</code></td><td><code>Price</code> (normal and special price), <code>Rating</code> (stars)</td></tr>
+<tr><td><code>ProductCard.tsx</code></td><td>Grid card: image, sale badge, wishlist heart, price</td></tr>
+<tr><td><code>ProductGrid.tsx</code></td><td>Two-column <code>FlatList</code> with infinite-scroll footer</td></tr>
+<tr><td><code>ProductResults.tsx</code></td><td><code>useInfiniteQuery</code> around <code>api.product.list</code> plus a sort bar; used by ProductList and Search</td></tr>
+<tr><td><code>ProductOptions.tsx</code></td><td>Renders every OpenCart option type (select, radio, checkbox, text, textarea, date, time, datetime). File options show a notice instead.</td></tr>
+<tr><td><code>QuantityStepper.tsx</code></td><td>− / + control with a minimum</td></tr>
+<tr><td><code>SelectModal.tsx</code></td><td>Searchable picker in a modal (countries, zones, option values)</td></tr>
+<tr><td><code>AddressForm.tsx</code></td><td>Address fields with country and zone pickers (loads zones when the country changes)</td></tr>
+<tr><td><code>HtmlView.tsx</code></td><td>Renders store HTML in an auto-sized WebView; links open in the system browser</td></tr></tbody></table></div>
+<h3 id="99-screens-srcscreens">9.9 Screens (<code>src/screens</code>)<a class="anchor-link" href="#99-screens-srcscreens" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Screen</th><th scope="col">Data</th><th scope="col">Notes</th></tr></thead><tbody><tr><td>Home</td><td><code>[&#39;home&#39;]</code></td><td>Logo or name, search box, banner carousel, category row, featured, specials, latest, bestsellers</td></tr>
+<tr><td>Categories</td><td><code>[&#39;categories&#39;, 0]</code></td><td>Expandable tree → ProductList</td></tr>
+<tr><td>ProductList</td><td><code>ProductResults</code></td><td>Category, manufacturer or specials, with sort</td></tr>
+<tr><td>Search</td><td><code>ProductResults</code></td><td>400 ms debounce before querying</td></tr>
+<tr><td>Product</td><td><code>[&#39;product&#39;, id]</code></td><td>Gallery, price and discounts, options, subscriptions, quantity, add to cart, wishlist, attributes, description, related products, reviews link</td></tr>
+<tr><td>Reviews, WriteReview</td><td><code>[&#39;reviews&#39;, id]</code></td><td>Infinite list; the write form validates on the server</td></tr>
+<tr><td>Cart</td><td><code>useCart</code></td><td>Edit quantity, remove, coupon, totals, stock warnings, checkout button</td></tr>
+<tr><td>Wishlist</td><td><code>useWishlist</code></td><td>Grid of saved products</td></tr>
+<tr><td>Account</td><td><code>StoreContext</code>, <code>[&#39;profile&#39;]</code></td><td>Login prompt or profile, newsletter switch, links, currency picker, information pages, logout</td></tr>
+<tr><td>Login, Register, ForgotPassword</td><td>n/a</td><td>Modal screens; can redirect back to Checkout</td></tr>
+<tr><td>Checkout</td><td><code>[&#39;checkout&#39;, …]</code></td><td>Step-by-step on one screen (see §12.7)</td></tr>
+<tr><td>Payment</td><td>n/a</td><td>WebView for online gateways</td></tr>
+<tr><td>OrderSuccess</td><td>n/a</td><td>Confirmation; the back stack is reset</td></tr>
+<tr><td>Orders, OrderDetail</td><td><code>[&#39;orders&#39;]</code>, <code>[&#39;order&#39;, id]</code></td><td>History, status timeline, reorder an item</td></tr>
+<tr><td>Addresses, AddressEdit</td><td><code>[&#39;addresses&#39;]</code></td><td>Address book with set-default</td></tr>
+<tr><td>EditProfile, ChangePassword</td><td>n/a</td><td>Account forms</td></tr>
+<tr><td>Information</td><td><code>[&#39;information&#39;, id]</code></td><td>CMS pages (About, Terms…)</td></tr></tbody></table></div>
+</section>
+<section class="doc-section">
+<h2 id="10-design-patterns">10. Design patterns<a class="anchor-link" href="#10-design-patterns" aria-label="Link to this section">#</a></h2>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Pattern</th><th scope="col">Where</th><th scope="col">Why</th></tr></thead><tbody><tr><td><strong>Backend for Frontend (BFF)</strong></td><td>The <code>mobile_api</code> extension</td><td>Endpoints are shaped for the app&#39;s screens (<code>catalog.home</code> returns all home sections in one call, <code>productCard</code> is a ready-to-render shape), so the app makes fewer, simpler calls.</td></tr>
+<tr><td><strong>Template Method / base class</strong></td><td><code>ApiController</code></td><td>Shared steps (guard, envelope, decoding, price and image helpers) live in one place. Each endpoint only writes its own logic.</td></tr>
+<tr><td><strong>Guard clause</strong></td><td><code>if (!$this-&gt;guard()) return;</code> at the top of every method</td><td>Authentication can&#39;t be forgotten in the middle of a method, and failure paths exit early.</td></tr>
+<tr><td><strong>Adapter / delegation to core</strong></td><td><code>cart.add</code> → <code>api/cart.addProduct</code>, totals → <code>api/cart.getTotals</code>, offline payments → <code>extension/opencart/payment/&lt;code&gt;.confirm</code></td><td>Reuses OpenCart&#39;s tested logic, so every installed shipping, payment and total extension works without changes.</td></tr>
+<tr><td><strong>Middleware / interceptor</strong></td><td>Startup action (server); <code>request()</code> (client)</td><td>Cross-cutting concerns (session, currency, CORS, headers, token persistence, error mapping) handled once, outside the business code.</td></tr>
+<tr><td><strong>Uniform response envelope</strong></td><td><code>ok()</code> / <code>fail()</code> ↔ <code>request()</code></td><td>One parser on the client. Field errors map straight onto form fields.</td></tr>
+<tr><td><strong>Server-authoritative state</strong></td><td>Cart, checkout, prices</td><td>The client never computes prices or totals; it displays what the server returns. This prevents price tampering and keeps the app and website consistent.</td></tr>
+<tr><td><strong>State machine in the session</strong></td><td>Checkout</td><td>Each step stores its result in the session (<code>customer</code> → addresses → <code>shipping_method</code> → <code>payment_method</code> → <code>order_id</code>). Changing an earlier step clears the later ones, so the order is always built from a valid sequence.</td></tr>
+<tr><td><strong>Repository / service module</strong></td><td><code>api/endpoints.ts</code></td><td>One typed function per endpoint. Screens don&#39;t know URLs.</td></tr>
+<tr><td><strong>Provider / Context</strong></td><td><code>StoreProvider</code></td><td>App-wide session data without prop drilling.</td></tr>
+<tr><td><strong>Custom hooks</strong></td><td><code>useCart</code>, <code>useAddToCart</code>, <code>useToggleWishlist</code>, <code>useStore</code></td><td>Encapsulate cache keys and update rules, so every screen updates the cart in the same way.</td></tr>
+<tr><td><strong>Cache-aside with write-through on mutation</strong></td><td><code>useCartMutation</code> → <code>setQueryData</code></td><td>Mutations return fresh server data and put it straight into the cache.</td></tr>
+<tr><td><strong>Container / presentational split</strong></td><td>Screens fetch; components such as <code>ProductCard</code>, <code>Price</code> and <code>AddressForm</code> mostly receive props</td><td>Components are reusable and easy to reason about.</td></tr>
+<tr><td><strong>Lazy module loading</strong></td><td><code>require()</code> of the navigator in <code>App.tsx</code></td><td>Lets runtime theme values apply to module-level styles.</td></tr>
+<tr><td><strong>Typed contracts</strong></td><td><code>types.ts</code>, <code>navigation/types.ts</code></td><td>Compile-time checking of the API and navigation contract.</td></tr></tbody></table></div>
+</section>
+<section class="doc-section">
+<h2 id="11-hooks-which-ones-are-used-and-why">11. Hooks: which ones are used and why<a class="anchor-link" href="#11-hooks-which-ones-are-used-and-why" aria-label="Link to this section">#</a></h2>
+<h3 id="111-react-built-in-hooks">11.1 React built-in hooks<a class="anchor-link" href="#111-react-built-in-hooks" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Hook</th><th scope="col">Used for</th><th scope="col">Example</th></tr></thead><tbody><tr><td><code>useState</code></td><td>Local UI state: form fields, selected options, quantity, field errors, search text, carousel index, WebView height</td><td><code>const [code, setCode] = useState(&#39;&#39;)</code> in CartScreen</td></tr>
+<tr><td><code>useEffect</code></td><td>Syncing with something outside render: search debounce (<code>setTimeout</code>), filling the coupon field when the cart loads, loading init on mount</td><td>SearchScreen waits 400 ms after typing before setting the query term</td></tr>
+<tr><td><code>useLayoutEffect</code></td><td>Setting header buttons before the first paint so they don&#39;t flicker</td><td>PaymentScreen&#39;s &quot;Cancel&quot; header button</td></tr>
+<tr><td><code>useMemo</code></td><td>Stable derived values: the Context value object, the navigation theme</td><td>Stops every consumer of <code>useStore()</code> re-rendering on each parent render</td></tr>
+<tr><td><code>useCallback</code></td><td>Stable function identities in the Context (<code>reload</code>, <code>login</code>, <code>logout</code>, <code>changeCurrency</code>)</td><td>So the <code>useMemo</code> above stays stable</td></tr>
+<tr><td><code>useRef</code></td><td>A mutable flag that must not trigger a render</td><td><code>finished</code> in PaymentScreen stops completing the order twice when several WebView events fire</td></tr>
+<tr><td><code>useContext</code></td><td>Reading <code>StoreContext</code> (wrapped by <code>useStore</code>)</td><td>n/a</td></tr></tbody></table></div>
+<h3 id="112-react-query-hooks">11.2 React Query hooks<a class="anchor-link" href="#112-react-query-hooks" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Hook</th><th scope="col">Used for</th><th scope="col">Why</th></tr></thead><tbody><tr><td><code>useQuery</code></td><td>Every read: home, product, cart, wishlist, orders, addresses, countries, checkout state</td><td>Caching, loading and error flags, refetch, <code>enabled</code> for dependent queries (e.g. shipping methods only after there is a shipping address)</td></tr>
+<tr><td><code>useInfiniteQuery</code></td><td>Product lists, reviews, orders</td><td>Page-based infinite scroll with <code>getNextPageParam: last.page &lt; last.pages ? last.page + 1 : undefined</code></td></tr>
+<tr><td><code>useMutation</code></td><td>Every write: add to cart, login, save address, confirm order…</td><td><code>isPending</code> for button spinners, <code>onSuccess</code> to update the cache, <code>onError</code> to show errors</td></tr>
+<tr><td><code>useQueryClient</code></td><td>Manual cache work: <code>setQueryData</code>, <code>invalidateQueries</code>, <code>removeQueries</code>, <code>clear</code></td><td>See the cache rules in §9.5</td></tr></tbody></table></div>
+<h3 id="113-react-navigation-hooks">11.3 React Navigation hooks<a class="anchor-link" href="#113-react-navigation-hooks" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Hook</th><th scope="col">Used for</th></tr></thead><tbody><tr><td><code>useNavigation</code></td><td>Navigating from components that aren&#39;t screens, or from tab screens to stack screens</td></tr>
+<tr><td>Screen props (<code>route</code>, <code>navigation</code>)</td><td>Reading typed parameters and calling <code>navigate</code>, <code>replace</code>, <code>reset</code> and <code>setOptions</code></td></tr></tbody></table></div>
+<h3 id="114-custom-hooks-in-this-project">11.4 Custom hooks in this project<a class="anchor-link" href="#114-custom-hooks-in-this-project" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Hook</th><th scope="col">File</th><th scope="col">What it gives you</th></tr></thead><tbody><tr><td><code>useStore()</code></td><td><code>context/StoreContext.tsx</code></td><td><code>init</code>, <code>customer</code>, <code>isLoggedIn</code>, <code>loading</code>, <code>error</code>, <code>reload</code>, <code>login</code>, <code>logout</code>, <code>setCustomer</code>, <code>changeCurrency</code>. Throws if used outside the provider.</td></tr>
+<tr><td><code>useCart()</code></td><td><code>hooks/useCart.ts</code></td><td>The cart query (<code>[&#39;cart&#39;]</code>)</td></tr>
+<tr><td><code>useCartCount()</code></td><td><code>hooks/useCart.ts</code></td><td>Number of items, for the tab badge</td></tr>
+<tr><td><code>useAddToCart()</code>, <code>useUpdateCartItem()</code>, <code>useRemoveCartItem()</code>, <code>useApplyCoupon()</code></td><td><code>hooks/useCart.ts</code></td><td>Cart mutations built on the private <code>useCartMutation</code> helper. Each writes the returned cart into the cache and invalidates checkout.</td></tr>
+<tr><td><code>useWishlist()</code></td><td><code>hooks/useWishlist.ts</code></td><td>The wishlist query (<code>[&#39;wishlist&#39;]</code>), which includes <code>product_ids</code> for quick lookups</td></tr>
+<tr><td><code>useToggleWishlist()</code></td><td><code>hooks/useWishlist.ts</code></td><td><code>isInWishlist(id)</code>, <code>toggle(id)</code>, <code>toggleAsync(id)</code>, <code>isPending</code>. Adds or removes depending on the current state and writes the result into the cache.</td></tr></tbody></table></div>
+<p><strong>Rule of thumb:</strong> if two or more screens read or change the same server data, put the query key and the update rule in a hook in <code>src/hooks/</code>. If only one screen uses it, an inline <code>useQuery</code> or <code>useMutation</code> is fine.</p>
+</section>
+<section class="doc-section">
+<h2 id="12-flows-end-to-end">12. Flows, end to end<a class="anchor-link" href="#12-flows-end-to-end" aria-label="Link to this section">#</a></h2>
+<h3 id="121-first-launch-and-session-creation">12.1 First launch and session creation<a class="anchor-link" href="#121-first-launch-and-session-creation" aria-label="Link to this section">#</a></h3>
+<div class="diagram card card-body mb-4"><pre class="mermaid" data-src="sequenceDiagram
+  participant App
+  participant SS as SecureStore
+  participant API as OpenCart
+
+  App-&gt;&gt;SS: read oc_session_token (none on first launch)
+  App-&gt;&gt;API: GET common.init (X-Api-Key only)
+  API-&gt;&gt;API: Core starts a new session (new id)
+  API--&gt;&gt;App: data.session_token + header X-Session-Token
+  App-&gt;&gt;SS: save token
+  App-&gt;&gt;App: applyTheme(init.theme), load navigator
+  Note over App,API: Every later request sends X-Session-Token.&lt;br/&gt;The startup reopens that session, so cart and login persist.">sequenceDiagram
+  participant App
+  participant SS as SecureStore
+  participant API as OpenCart
+
+  App-&gt;&gt;SS: read oc_session_token (none on first launch)
+  App-&gt;&gt;API: GET common.init (X-Api-Key only)
+  API-&gt;&gt;API: Core starts a new session (new id)
+  API--&gt;&gt;App: data.session_token + header X-Session-Token
+  App-&gt;&gt;SS: save token
+  App-&gt;&gt;App: applyTheme(init.theme), load navigator
+  Note over App,API: Every later request sends X-Session-Token.&lt;br/&gt;The startup reopens that session, so cart and login persist.</pre></div>
+<p>If the session expires on the server (System → Settings → Server → session lifetime), the server silently starts a new one. The response header carries the new id and <code>client.ts</code> stores it. The user then appears as a logged-out guest with an empty cart. This is the same as on the website.</p>
+<h3 id="122-browsing">12.2 Browsing<a class="anchor-link" href="#122-browsing" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Home</strong> calls <code>catalog.home</code> once. It returns banners (from the banner chosen in the module settings), top-level categories, featured products (IDs from settings), latest, specials, and bestsellers (only if the core Bestseller module&#39;s table exists).</li>
+<li><strong>Category → product list</strong> calls <code>product.index</code> with <code>category_id</code>, <code>sub_category=1</code>, <code>sort</code>, <code>page</code> and <code>limit</code>. <code>useInfiniteQuery</code> loads the next page when you scroll near the end.</li>
+<li><strong>Search</strong> debounces typing by 400 ms, then calls <code>product.index&amp;search=…</code>.</li>
+<li><strong>Product</strong> calls <code>product.info</code>. It returns images, price, special and quantity discounts (with tax applied according to store settings), options (variants inherit their master&#39;s options), subscription plans, attributes, related products, review summary, stock text and the wishlist flag.</li>
+<li>Prices are empty strings when the store requires login to see prices and nobody is logged in.</li>
+</ul>
+<h3 id="123-authentication">12.3 Authentication<a class="anchor-link" href="#123-authentication" aria-label="Link to this section">#</a></h3>
+<p><strong>Model:</strong> login is <strong>session-based</strong>, exactly like the website. There is no separate JWT. Logging in marks the server-side session (the one identified by <code>X-Session-Token</code>) as belonging to the customer. The token is stored in SecureStore, so the customer stays logged in across app restarts until the session expires or they log out.</p>
+<div class="diagram card card-body mb-4"><pre class="mermaid" data-src="sequenceDiagram
+  participant U as User
+  participant App
+  participant API as account.login
+  participant DB
+
+  U-&gt;&gt;App: email + password
+  App-&gt;&gt;API: POST {email, password} + X-Session-Token
+  API-&gt;&gt;API: guard() (key)
+  API-&gt;&gt;API: logout any current customer
+  API-&gt;&gt;API: 2FA enabled? → 403 (2FA is browser-only)
+  API-&gt;&gt;DB: login attempts ≥ limit within 1 hour? → 429
+  API-&gt;&gt;DB: customer disabled or not approved? → 403
+  API-&gt;&gt;API: $customer-&gt;login(email, password)
+  alt wrong password
+    API-&gt;&gt;DB: addLoginAttempt(email)
+    API--&gt;&gt;App: 401 &quot;No match for E-Mail Address and/or Password&quot;
+  else success
+    API-&gt;&gt;API: session customer data, clear unpaid checkout state
+    API-&gt;&gt;DB: merge guest wishlist into account, record login IP
+    API-&gt;&gt;DB: deleteLoginAttempts(email)
+    API--&gt;&gt;App: {customer}
+    App-&gt;&gt;App: setCustomer, invalidate all queries (prices, cart, wishlist refetch)
+  end">sequenceDiagram
+  participant U as User
+  participant App
+  participant API as account.login
+  participant DB
+
+  U-&gt;&gt;App: email + password
+  App-&gt;&gt;API: POST {email, password} + X-Session-Token
+  API-&gt;&gt;API: guard() (key)
+  API-&gt;&gt;API: logout any current customer
+  API-&gt;&gt;API: 2FA enabled? → 403 (2FA is browser-only)
+  API-&gt;&gt;DB: login attempts ≥ limit within 1 hour? → 429
+  API-&gt;&gt;DB: customer disabled or not approved? → 403
+  API-&gt;&gt;API: $customer-&gt;login(email, password)
+  alt wrong password
+    API-&gt;&gt;DB: addLoginAttempt(email)
+    API--&gt;&gt;App: 401 &quot;No match for E-Mail Address and/or Password&quot;
+  else success
+    API-&gt;&gt;API: session customer data, clear unpaid checkout state
+    API-&gt;&gt;DB: merge guest wishlist into account, record login IP
+    API-&gt;&gt;DB: deleteLoginAttempts(email)
+    API--&gt;&gt;App: {customer}
+    App-&gt;&gt;App: setCustomer, invalidate all queries (prices, cart, wishlist refetch)
+  end</pre></div>
+<ul>
+<li><strong>Cart merge:</strong> OpenCart&#39;s cart table is keyed by session id and customer id. After login, core <code>Cart</code> loads the customer&#39;s saved cart together with the guest session&#39;s cart, as on the website.</li>
+<li><strong>Register</strong> (<code>account.register</code>) validates with the same rules and language strings as the website: name lengths, email format and uniqueness, telephone (if required), password length and complexity from store settings, and the account terms checkbox if a terms page is set. If the customer group requires <strong>approval</strong>, it returns <code>{approval: true, customer: null}</code> and the app shows a message instead of logging in. Otherwise it logs the customer in straight away.</li>
+<li><strong>Logout</strong> (<code>account.logout</code>) calls <code>$customer-&gt;logout()</code> and removes the same session keys as the website&#39;s logout. The app then calls <code>queryClient.clear()</code>.</li>
+<li><strong>Forgotten password</strong> (<code>account.forgotten</code>) creates a reset token through the core model, which triggers the core email. It returns <strong>the same message whether or not the email exists</strong>, so it can&#39;t be used to find out which emails have accounts.</li>
+<li><strong>Change password</strong> (<code>account.password</code>) requires the current password.</li>
+<li><strong>Login-gated screens:</strong> endpoints protected by <code>guardCustomer()</code> return 401. The app shows a login prompt on the Account tab. Login and Register accept <code>redirect: &#39;Checkout&#39;</code> and return the user to checkout afterwards.</li>
+</ul>
+<h3 id="124-cart">12.4 Cart<a class="anchor-link" href="#124-cart" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Action</th><th scope="col">Endpoint</th><th scope="col">Server behaviour</th></tr></thead><tbody><tr><td>Add</td><td><code>cart.add {product_id, quantity, option, subscription_plan_id}</code></td><td>Delegates to core <code>api/cart.addProduct</code>: checks the product exists and is enabled, validates required options, option values, variants, minimum quantity and subscription plan. Then resets checkout methods.</td></tr>
+<tr><td>Edit quantity</td><td><code>cart.edit {key, quantity}</code></td><td>Updates the line; quantity 0 or less removes it</td></tr>
+<tr><td>Remove</td><td><code>cart.remove {key}</code></td><td>n/a</td></tr>
+<tr><td>Coupon</td><td><code>cart.coupon {coupon}</code></td><td>Validated by the core coupon total extension; an empty string removes it</td></tr>
+<tr><td>View</td><td><code>cart.index</code></td><td>Lines (options, stock flag, minimum check, subscription text), totals from <code>api/cart.getTotals</code>, weight, warnings, <code>can_checkout</code></td></tr></tbody></table></div>
+<p>Each response is the <strong>full cart</strong>. The hooks write it into the cache, so the cart screen and the tab badge update without another request.</p>
+<p><strong>Option format:</strong> <code>option</code> is an object keyed by <code>product_option_id</code>. Select and radio options take one <code>product_option_value_id</code>. Checkbox options take an array of IDs. Text, textarea, date, time and datetime options take a string.</p>
+<h3 id="125-wishlist">12.5 Wishlist<a class="anchor-link" href="#125-wishlist" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>Guest:</strong> product IDs are kept in <code>session[&#39;wishlist&#39;]</code>.</li>
+<li><strong>Customer:</strong> stored in the database through <code>model_account_wishlist</code>.</li>
+<li><strong>On login:</strong> the guest list is moved into the account.</li>
+<li>Every endpoint returns <code>{products, product_ids}</code>. <code>useToggleWishlist</code> uses <code>product_ids</code> to decide between add and remove.</li>
+</ul>
+<h3 id="126-addresses">12.6 Addresses<a class="anchor-link" href="#126-addresses" aria-label="Link to this section">#</a></h3>
+<p><code>address.save</code> validates through <code>validateAddress()</code>, which applies the same rules as the website: postcode required per country, zone required if the country has zones. It creates or updates the address. The first address automatically becomes the default. If the checkout session points at an address that was edited, the session copy is refreshed. Delete refuses the default address, as the website does.</p>
+<h3 id="127-checkout">12.7 Checkout<a class="anchor-link" href="#127-checkout" aria-label="Link to this section">#</a></h3>
+<p>The checkout follows the website&#39;s steps and <strong>uses the same session keys</strong>, so every installed shipping, payment and order-total extension works unchanged.</p>
+<div class="diagram card card-body mb-4"><pre class="mermaid" data-src="stateDiagram-v2
+  [*] --&gt; NeedCustomer
+  NeedCustomer --&gt; HaveCustomer: logged in, or checkout.guest
+  HaveCustomer --&gt; HaveShippingAddress: checkout.shippingAddress (if shipping required)
+  HaveCustomer --&gt; HavePaymentAddress: checkout.paymentAddress (if required and no shipping)
+  HaveShippingAddress --&gt; HaveShippingMethod: checkout.shippingMethods → checkout.shippingMethod
+  HaveShippingMethod --&gt; HavePaymentAddress: if the store requires a payment address
+  HaveShippingMethod --&gt; HavePaymentMethod: checkout.paymentMethods → checkout.paymentMethod
+  HavePaymentAddress --&gt; HavePaymentMethod
+  HavePaymentMethod --&gt; OrderSaved: checkout.confirm {comment, agree}
+  OrderSaved --&gt; Complete: offline payment (cod, cheque, bank_transfer, free_checkout)
+  OrderSaved --&gt; WebViewPayment: any other gateway → payment_url
+  WebViewPayment --&gt; Complete: web view reaches checkout/success → checkout.complete
+  WebViewPayment --&gt; HavePaymentMethod: checkout/failure or user cancels
+  Complete --&gt; [*]">stateDiagram-v2
+  [*] --&gt; NeedCustomer
+  NeedCustomer --&gt; HaveCustomer: logged in, or checkout.guest
+  HaveCustomer --&gt; HaveShippingAddress: checkout.shippingAddress (if shipping required)
+  HaveCustomer --&gt; HavePaymentAddress: checkout.paymentAddress (if required and no shipping)
+  HaveShippingAddress --&gt; HaveShippingMethod: checkout.shippingMethods → checkout.shippingMethod
+  HaveShippingMethod --&gt; HavePaymentAddress: if the store requires a payment address
+  HaveShippingMethod --&gt; HavePaymentMethod: checkout.paymentMethods → checkout.paymentMethod
+  HavePaymentAddress --&gt; HavePaymentMethod
+  HavePaymentMethod --&gt; OrderSaved: checkout.confirm {comment, agree}
+  OrderSaved --&gt; Complete: offline payment (cod, cheque, bank_transfer, free_checkout)
+  OrderSaved --&gt; WebViewPayment: any other gateway → payment_url
+  WebViewPayment --&gt; Complete: web view reaches checkout/success → checkout.complete
+  WebViewPayment --&gt; HavePaymentMethod: checkout/failure or user cancels
+  Complete --&gt; [*]</pre></div>
+<p>Step by step:</p>
+<ol>
+<li><strong>Customer.</strong> A logged-in customer&#39;s details are put in <code>session[&#39;customer&#39;]</code> automatically by <code>state()</code>. A guest posts <code>checkout.guest {firstname, lastname, email, telephone}</code>. Guest checkout is only allowed when the store enables it, &quot;login to see prices&quot; is off, and the cart has no downloadable or subscription products (<code>guestAllowed()</code>), the same rule as the website.</li>
+<li><strong>Shipping address</strong> (only if the cart needs shipping). Either <code>{address_id}</code> from the address book (logged in) or a full address (guest, or a new address with an optional <code>save</code>). Changing it clears the chosen shipping and payment methods, because quotes and taxes depend on the address.</li>
+<li><strong>Shipping method.</strong> <code>checkout.shippingMethods</code> asks every enabled shipping extension for quotes (<code>model_checkout_shipping_method-&gt;getMethods</code>) and <strong>stores the quotes in the session</strong>. <code>checkout.shippingMethod {code: &quot;flat.flat&quot;}</code> only accepts a code that exists in those stored quotes. The price comes from the stored quote, never from the client.</li>
+<li><strong>Payment address</strong> (only if <em>System → Settings → Option → Billing address required</em> is on).</li>
+<li><strong>Payment method.</strong> <code>checkout.paymentMethods</code> lists methods from enabled payment extensions for the payment (or shipping) address and stores them. <code>checkout.paymentMethod {code}</code> accepts only a stored code.</li>
+<li><strong>Confirm.</strong> <code>checkout.confirm {comment, agree}</code>:<ul>
+<li><code>requireCheckoutCustomer()</code> and <code>requireCart()</code> (products in the cart, in stock unless the store allows otherwise, minimum quantities met).</li>
+<li><code>validateConfirm()</code>: every required step is done, the terms are accepted if a checkout terms page is set, and the shipping data is dropped if the cart no longer needs shipping.</li>
+<li><code>saveOrder()</code> builds the order exactly like <code>catalog/controller/checkout/confirm.php</code>: totals from the core total extensions, taxes, customer, addresses, methods, affiliate and marketing tracking, products with subscription data, IP and user agent. It saves with <code>model_checkout_order-&gt;addOrder()</code> and order status 0 (missing order). If an unpaid order from an earlier attempt exists in the session, it is <strong>updated</strong> with <code>editOrder()</code> instead of creating a duplicate.</li>
+<li><strong>Offline payment</strong> (<code>cod</code>, <code>cheque</code>, <code>bank_transfer</code>, <code>free_checkout</code> from the core <code>opencart</code> extension): runs that extension&#39;s own <code>confirm()</code> controller, which sets the order status and sends emails. If it reports success (a redirect to <code>checkout/success</code>), <code>completeOrder()</code> clears the cart and checkout session keys. The response is <code>{status: &quot;complete&quot;, order_id}</code>.</li>
+<li><strong>Any other gateway:</strong> the response is <code>{status: &quot;payment_required&quot;, payment_url, order_id}</code>.</li>
+</ul>
+</li>
+</ol>
+<p>The app shows all steps on one <code>CheckoutScreen</code>. Each step&#39;s mutation returns the new checkout state, which is written into <code>[&#39;checkout&#39;, &#39;state&#39;]</code>. Shipping and payment method lists are separate queries whose keys include the address and method they depend on, so they refetch automatically when those change. They only run once their prerequisites are set (<code>enabled</code>).</p>
+<h3 id="128-online-payment-webview">12.8 Online payment (WebView)<a class="anchor-link" href="#128-online-payment-webview" aria-label="Link to this section">#</a></h3>
+<div class="diagram card card-body mb-4"><pre class="mermaid" data-src="sequenceDiagram
+  participant App
+  participant WV as WebView
+  participant Pay as checkout.pay
+  participant GW as Payment extension / gateway
+
+  App-&gt;&gt;WV: open payment_url (contains session_token)
+  WV-&gt;&gt;Pay: GET …checkout.pay&amp;session_token=…
+  Pay-&gt;&gt;Pay: startup restores session from the query parameter
+  Pay-&gt;&gt;WV: Set-Cookie OCSESSID=&lt;same session&gt;, HttpOnly, SameSite=Lax
+  Pay-&gt;&gt;WV: HTML: order summary + the payment extension's own form/buttons
+  WV-&gt;&gt;GW: user pays (gateway's own JS and AJAX use the cookie session)
+  GW-&gt;&gt;WV: redirect to checkout/success (or checkout/failure)
+  WV--&gt;&gt;App: onNavigationStateChange / onShouldStartLoadWithRequest sees &quot;checkout/success&quot;
+  App-&gt;&gt;App: POST checkout.complete (clears cart if order status &gt; 0)
+  App-&gt;&gt;App: reset navigation → OrderSuccess">sequenceDiagram
+  participant App
+  participant WV as WebView
+  participant Pay as checkout.pay
+  participant GW as Payment extension / gateway
+
+  App-&gt;&gt;WV: open payment_url (contains session_token)
+  WV-&gt;&gt;Pay: GET …checkout.pay&amp;session_token=…
+  Pay-&gt;&gt;Pay: startup restores session from the query parameter
+  Pay-&gt;&gt;WV: Set-Cookie OCSESSID=&lt;same session&gt;, HttpOnly, SameSite=Lax
+  Pay-&gt;&gt;WV: HTML: order summary + the payment extension's own form/buttons
+  WV-&gt;&gt;GW: user pays (gateway's own JS and AJAX use the cookie session)
+  GW-&gt;&gt;WV: redirect to checkout/success (or checkout/failure)
+  WV--&gt;&gt;App: onNavigationStateChange / onShouldStartLoadWithRequest sees &quot;checkout/success&quot;
+  App-&gt;&gt;App: POST checkout.complete (clears cart if order status &gt; 0)
+  App-&gt;&gt;App: reset navigation → OrderSuccess</pre></div>
+<ul>
+<li>The success and failure URLs are matched with <code>/checkout[/%2F-]+success/i</code>, so both <code>route=checkout/success</code> and SEO URLs work.</li>
+<li>A <code>useRef</code> flag makes sure the order is only finished once.</li>
+<li>The <strong>Cancel</strong> button asks for confirmation. The unpaid order stays at status 0 and is reused on the next confirm.</li>
+<li>On Expo web, the payment page opens in a new tab and the user taps &quot;I have paid&quot;.</li>
+</ul>
+<h3 id="129-orders-and-reorder">12.9 Orders and reorder<a class="anchor-link" href="#129-orders-and-reorder" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><code>order.index</code> returns the customer&#39;s orders, paginated. <code>order.info</code> returns the details. Both use <code>model_account_order</code>, which <strong>only returns orders belonging to the logged-in customer</strong>.</li>
+<li><code>order.reorder {order_id, order_product_id}</code> adds that line (with its options) back to the cart, if the product is still available.</li>
+</ul>
+<h3 id="1210-reviews">12.10 Reviews<a class="anchor-link" href="#1210-reviews" aria-label="Link to this section">#</a></h3>
+<p><code>product.review</code> mirrors the website&#39;s validation: reviews enabled, guest reviews allowed or logged in, author 3–25 characters, text 25–1000 characters, rating 1–5. New reviews are saved with status 0, so they wait for admin approval as on the website.</p>
+<h3 id="1211-currency">12.11 Currency<a class="anchor-link" href="#1211-currency" aria-label="Link to this section">#</a></h3>
+<p>The Account tab shows a currency picker when more than one currency is enabled. <code>changeCurrency(code)</code> saves the code to SecureStore, reloads init and invalidates every query. From then on, <code>client.ts</code> adds <code>&amp;currency=XXX</code> to every request, and the startup puts it in the session.</p>
+<h3 id="1212-theme-colours">12.12 Theme colours<a class="anchor-link" href="#1212-theme-colours" aria-label="Link to this section">#</a></h3>
+<p>The admin sets colours → <code>common.init</code> returns <code>theme</code> → <code>App.tsx</code> calls <code>applyTheme()</code> before loading the navigator → every screen&#39;s styles use the store colours. A change takes effect on the next app launch. See §9.2 and §9.7.</p>
+</section>
+<section class="doc-section">
+<h2 id="13-configuration-reference">13. Configuration reference<a class="anchor-link" href="#13-configuration-reference" aria-label="Link to this section">#</a></h2>
+<h3 id="131-app-environment-variables-mobileenv-srcconfigts">13.1 App: environment variables (<code>mobile/.env</code>, <code>src/config.ts</code>)<a class="anchor-link" href="#131-app-environment-variables-mobileenv-srcconfigts" aria-label="Link to this section">#</a></h3>
+<p>Set them in <code>mobile/.env</code> for local development (copy <code>.env.example</code>), and in <code>eas.json</code> or as EAS environment variables for store builds. Expo compiles <code>EXPO_PUBLIC_*</code> values into the app, so <strong>they are not secret</strong>. Restart Expo with <code>-c</code> after changing them.</p>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Variable</th><th scope="col">Example</th><th scope="col">Notes</th></tr></thead><tbody><tr><td><code>EXPO_PUBLIC_STORE_URL</code></td><td><code>https://shop.example.com/</code></td><td>The <strong>storefront</strong> URL (a missing trailing slash is added), not the API URL. Must be reachable from the phone. <strong>Release builds refuse <code>http://</code>.</strong></td></tr>
+<tr><td><code>EXPO_PUBLIC_API_KEY</code></td><td><code>2f7e…</code></td><td>From the module settings page; 20–64 letters and numbers</td></tr>
+<tr><td><code>EXPO_PUBLIC_LANGUAGE</code></td><td><code>en-gb</code></td><td>Optional. Sent as <code>&amp;language=</code> on every request; must be a language installed in the store.</td></tr></tbody></table></div>
+<p><code>config.pageSize</code> (20 products per page) is a constant in <code>src/config.ts</code>. <code>configProblem()</code> in the same file validates everything above; the API client and the boot screen use it.</p>
+<h3 id="132-app-mobileappconfigts-and-easjson">13.2 App: <code>mobile/app.config.ts</code> and <code>eas.json</code><a class="anchor-link" href="#132-app-mobileappconfigts-and-easjson" aria-label="Link to this section">#</a></h3>
+<p><code>app.config.ts</code> replaced <code>app.json</code> so the app configuration can depend on the build. Build-time variables (they are read in Node while building, not by the app):</p>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Variable</th><th scope="col">Default</th><th scope="col">Effect</th></tr></thead><tbody><tr><td><code>APP_VARIANT</code></td><td><code>development</code></td><td><code>development</code>, <code>preview</code> or <code>production</code>. Set by the <code>eas.json</code> profiles.</td></tr>
+<tr><td><code>APP_BUNDLE_ID</code></td><td><code>com.example.ocstore</code></td><td>iOS bundle identifier and Android package. Non-production builds append <code>.dev</code> / <code>.preview</code> so they install next to the store version. <strong>The production build stops while it is still <code>com.example.*</code></strong>, because the ID can&#39;t change after publishing.</td></tr>
+<tr><td><code>APP_NAME</code></td><td><code>OpenCart Store</code></td><td>Display name; non-production builds append &quot;(Dev)&quot; / &quot;(Preview)&quot;.</td></tr>
+<tr><td><code>EAS_PROJECT_ID</code></td><td>none</td><td>Printed by <code>eas init</code>; enables EAS Build and Update.</td></tr></tbody></table></div>
+<p>Other settings in <code>app.config.ts</code>:</p>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Key</th><th scope="col">Purpose</th></tr></thead><tbody><tr><td><code>version</code></td><td>App version shown in the stores. Build numbers are managed by EAS (<code>appVersionSource: remote</code>, <code>autoIncrement</code> in the production profile).</td></tr>
+<tr><td><code>ios.infoPlist.NSAppTransportSecurity.NSAllowsLocalNetworking</code></td><td>Plain HTTP to local network addresses, <strong>only in development and preview builds</strong>. Production builds keep Apple&#39;s HTTPS-only default.</td></tr>
+<tr><td><code>icon</code>, <code>android.adaptiveIcon</code>, <code>expo-splash-screen</code> plugin</td><td>Images in <code>mobile/assets/</code>, generated by <code>scripts/build-icons.cjs</code></td></tr>
+<tr><td><code>scheme</code></td><td><code>ocstore</code>, for deep links (<code>ocstore://…</code>)</td></tr>
+<tr><td><code>orientation</code>, <code>userInterfaceStyle</code></td><td>Portrait only, light mode</td></tr>
+<tr><td><code>ios.config.usesNonExemptEncryption</code></td><td><code>false</code>: the app only uses standard HTTPS, which answers Apple&#39;s export-compliance question</td></tr></tbody></table></div>
+<h3 id="133-store-module-settings-extensions--extensions--modules--mobile-app-api">13.3 Store: module settings (Extensions → Extensions → Modules → Mobile App API)<a class="anchor-link" href="#133-store-module-settings-extensions--extensions--modules--mobile-app-api" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Setting</th><th scope="col">Key</th><th scope="col">Default</th><th scope="col">Effect</th></tr></thead><tbody><tr><td>Status</td><td><code>module_mobile_api_status</code></td><td>Off</td><td>Off → every endpoint returns 503 and the startup does nothing</td></tr>
+<tr><td>API Key</td><td><code>module_mobile_api_key</code></td><td>random, 40 characters</td><td>Must match <code>config.apiKey</code>; 20–64 letters and numbers</td></tr>
+<tr><td>CORS Origin</td><td><code>module_mobile_api_cors</code></td><td>empty</td><td>Only for Expo web, e.g. <code>http://localhost:8081</code> or <code>*</code></td></tr>
+<tr><td>Home Banner</td><td><code>module_mobile_api_banner_id</code></td><td>none</td><td>Banner group shown on Home</td></tr>
+<tr><td>Featured Product IDs</td><td><code>module_mobile_api_featured</code></td><td>empty</td><td>Comma-separated, e.g. <code>40,42,30</code></td></tr>
+<tr><td>Products per Home Section</td><td><code>module_mobile_api_home_limit</code></td><td>10</td><td>n/a</td></tr>
+<tr><td>Product Image Size</td><td><code>module_mobile_api_image_width</code> / <code>_height</code></td><td>500 × 500</td><td>Thumbnails in lists</td></tr>
+<tr><td>Primary Colour</td><td><code>module_mobile_api_color_primary</code></td><td><code>#1f6feb</code></td><td>§9.7</td></tr>
+<tr><td>Secondary Colour</td><td><code>module_mobile_api_color_secondary</code></td><td><code>#e5484d</code></td><td>Sale badges, special prices, hearts, count badges</td></tr>
+<tr><td>Tertiary Colour</td><td><code>module_mobile_api_color_tertiary</code></td><td><code>#ffffff</code></td><td>Header and tab bar</td></tr>
+<tr><td>Font Colour</td><td><code>module_mobile_api_color_text</code></td><td><code>#1b1f24</code></td><td>Main text</td></tr>
+<tr><td>Button Colour</td><td><code>module_mobile_api_color_button</code></td><td>empty (= primary)</td><td>Main buttons</td></tr>
+<tr><td>Button Text Colour</td><td><code>module_mobile_api_color_button_text</code></td><td>empty (= automatic)</td><td>Text on main buttons</td></tr></tbody></table></div>
+<h3 id="134-store-core-opencart-settings-the-app-reads-or-depends-on">13.4 Store: core OpenCart settings the app reads or depends on<a class="anchor-link" href="#134-store-core-opencart-settings-the-app-reads-or-depends-on" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Setting</th><th scope="col">Location</th><th scope="col">Effect in the app</th></tr></thead><tbody><tr><td>Two-factor authentication</td><td>System → Settings → Option</td><td><strong>Must be off.</strong> Logins return 403 while it&#39;s on.</td></tr>
+<tr><td>Login attempts</td><td>System → Settings → Option</td><td>Lock-out threshold (1 hour) for <code>account.login</code></td></tr>
+<tr><td>Guest checkout</td><td>System → Settings → Option</td><td>Shows the guest form at checkout</td></tr>
+<tr><td>Login to see prices</td><td>System → Settings → Option</td><td>Hides prices for guests and disables guest checkout</td></tr>
+<tr><td>Billing address required</td><td>System → Settings → Option</td><td>Adds the payment address step</td></tr>
+<tr><td>Account / checkout terms page</td><td>System → Settings → Option</td><td>Adds &quot;I agree&quot; checkboxes</td></tr>
+<tr><td>Telephone required, password length and rules</td><td>System → Settings → Option</td><td>Registration and profile validation</td></tr>
+<tr><td>Display prices with tax</td><td>System → Settings → Option</td><td>Applied by <code>formatPrice</code></td></tr>
+<tr><td>Stock checkout</td><td>System → Settings → Option</td><td>Allows checkout with out-of-stock items</td></tr>
+<tr><td>Reviews on, guest reviews</td><td>System → Settings → Option</td><td>Write-review button</td></tr>
+<tr><td>Product count</td><td>System → Settings → Option</td><td>Category counts</td></tr>
+<tr><td>Session lifetime</td><td>System → Settings → Server</td><td>How long the app stays logged in while inactive</td></tr>
+<tr><td>Logo, store name, contact details</td><td>System → Settings → Store / Image</td><td>Home header and Account tab</td></tr>
+<tr><td>Currencies, languages</td><td>System → Localisation</td><td>Currency picker; <code>language</code> must exist</td></tr>
+<tr><td>Shipping, payment, order totals</td><td>Extensions</td><td>All supported automatically</td></tr></tbody></table></div>
+<h3 id="135-local-docker-env">13.5 Local Docker: <code>.env</code><a class="anchor-link" href="#135-local-docker-env" aria-label="Link to this section">#</a></h3>
+<p><code>DB_NAME</code>, <code>DB_USER</code>, <code>DB_PASSWORD</code>, <code>DB_ROOT_PASSWORD</code>, <code>ADMIN_USER</code>, <code>ADMIN_PASSWORD</code>. These are development credentials only. Don&#39;t reuse them anywhere real.</p>
+</section>
+<section class="doc-section">
+<h2 id="14-security-measures">14. Security measures<a class="anchor-link" href="#14-security-measures" aria-label="Link to this section">#</a></h2>
+<h3 id="141-what-is-in-place">14.1 What is in place<a class="anchor-link" href="#141-what-is-in-place" aria-label="Link to this section">#</a></h3>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Area</th><th scope="col">Measure</th><th scope="col">Where</th></tr></thead><tbody><tr><td><strong>API access</strong></td><td>Every endpoint calls <code>guard()</code>. A missing or wrong <code>X-Api-Key</code> returns 401. The comparison uses <code>hash_equals</code> (constant time, so no timing leaks).</td><td><code>ApiController::guard()</code></td></tr>
+<tr><td><strong>Kill switch</strong></td><td>Turning the module off stops every endpoint (503) and the startup.</td><td><code>guard()</code>, startup</td></tr>
+<tr><td><strong>Customer-only data</strong></td><td>Account, address and order endpoints call <code>guardCustomer()</code>. Orders and addresses are loaded through core models that filter by the logged-in <code>customer_id</code>, so one customer can&#39;t read another&#39;s order by changing <code>order_id</code>.</td><td><code>account.php</code>, <code>address.php</code>, <code>order.php</code></td></tr>
+<tr><td><strong>Session token</strong></td><td>Sent only in a header (not in URLs, except for the payment page). Format checked (<code>^[a-zA-Z0-9]{26,52}$</code>). Stored in the iOS Keychain or Android Keystore through SecureStore. <code>credentials: &#39;omit&#39;</code> stops cookie confusion.</td><td>startup, <code>client.ts</code></td></tr>
+<tr><td><strong>No client-side prices</strong></td><td>The client sends only product IDs, quantities, options and method <strong>codes</strong>. Prices, discounts, taxes and totals are always calculated on the server from the database. Shipping and payment codes must exist in the quotes the server stored in the session, so a forged <code>code</code> is rejected.</td><td><code>cart.php</code>, <code>checkout.php</code></td></tr>
+<tr><td><strong>Order integrity</strong></td><td>Orders are built from the server-side cart and session, exactly like the website. Online orders stay at status 0 until the gateway confirms payment. <code>checkout.complete</code> only clears the cart when the order status is above 0.</td><td><code>saveOrder()</code>, <code>complete()</code></td></tr>
+<tr><td><strong>Brute-force protection</strong></td><td>Uses OpenCart&#39;s login-attempt table: too many failures within an hour → 429.</td><td><code>account.login</code></td></tr>
+<tr><td><strong>Account enumeration</strong></td><td>Forgotten password always returns the same message.</td><td><code>account.forgotten</code></td></tr>
+<tr><td><strong>Account state</strong></td><td>Disabled or unapproved accounts can&#39;t log in. 2FA stores refuse app logins instead of bypassing 2FA.</td><td><code>account.login</code></td></tr>
+<tr><td><strong>Input handling</strong></td><td>JSON bodies go through OpenCart&#39;s <code>request-&gt;clean()</code> (HTML-escaped like form posts). All IDs are cast with <code>(int)</code>. Validation uses core helpers (<code>oc_validate_length</code>, <code>oc_validate_email</code>) and core language strings. Database access goes through core models (escaped and parameterised by OpenCart).</td><td><code>parseJsonBody()</code>, all controllers</td></tr>
+<tr><td><strong>Output</strong></td><td><code>Content-Type: application/json</code>, <code>Cache-Control: no-store</code> (no caching of personal data by proxies). Outgoing strings are decoded for the native client, where they are rendered as text, not HTML.</td><td><code>output()</code></td></tr>
+<tr><td><strong>HTML content</strong></td><td>Store HTML (descriptions, information pages) is rendered in an isolated WebView. Links open in the system browser instead of inside the app.</td><td><code>HtmlView.tsx</code></td></tr>
+<tr><td><strong>Payment page cookie</strong></td><td><code>HttpOnly</code>, <code>SameSite=Lax</code>, <code>Secure</code> when served over HTTPS. The payment form is the gateway&#39;s own code. Card data never passes through the app.</td><td><code>checkout.pay</code></td></tr>
+<tr><td><strong>Admin</strong></td><td>Saving settings requires OpenCart&#39;s <code>modify</code> permission. Key and colour formats are validated. Install and uninstall check <code>extension/module</code> permission.</td><td>admin controller</td></tr>
+<tr><td><strong>CORS</strong></td><td>Off by default. Native apps don&#39;t need it. Only enable it for web testing.</td><td>startup</td></tr>
+<tr><td><strong>Transport</strong></td><td>Release builds refuse an <code>http://</code> store URL (<code>configProblem()</code>), and the production iOS build has no local-network HTTP exception.</td><td><code>src/config.ts</code>, <code>app.config.ts</code></td></tr>
+<tr><td><strong>Timeouts</strong></td><td>Requests are aborted after 20 seconds.</td><td><code>client.ts</code></td></tr></tbody></table></div>
+<h3 id="142-things-to-understand-not-bugs-but-limits-of-the-design">14.2 Things to understand (not bugs, but limits of the design)<a class="anchor-link" href="#142-things-to-understand-not-bugs-but-limits-of-the-design" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><strong>The API key isn&#39;t a secret.</strong> It ships inside the app and can be extracted from the bundle. It stops casual and accidental use and lets you rotate access (change the key, release an app update), but it doesn&#39;t authenticate <em>who</em> is calling. The real protection is that every endpoint only does what a website visitor could already do, and prices are server-side.</li>
+<li><strong>The session token is a bearer credential.</strong> Anyone who has it can act as that customer until the session expires. Keep HTTPS on and keep the session lifetime reasonable.</li>
+<li><strong>The payment URL contains the session token.</strong> It&#39;s needed because a WebView can&#39;t send custom headers on its first load. The URL is only used inside the app&#39;s WebView, but it could appear in server access logs. Make sure those logs are protected.</li>
+<li><strong>The session id isn&#39;t regenerated at login.</strong> This matches OpenCart&#39;s own storefront behaviour. A possible hardening is to issue a new id on login and return it in <code>X-Session-Token</code>; <code>client.ts</code> already accepts changed tokens.</li>
+<li><strong>No captcha</strong> on registration and reviews (captchas are browser widgets). The login-attempt limit and the API key are the protection. If spam becomes a problem, add rate limiting at the web server or CDN (for example per IP on <code>route=extension/mobile_api/api/account.register</code>).</li>
+<li><strong>The dev store can be exposed on the LAN</strong> (<code>STORE_BIND_ADDRESS=0.0.0.0</code> in <code>.env</code>; the default is <code>127.0.0.1</code>). Never use that setup on a shared or public network.</li>
+</ul>
+<h3 id="143-production-checklist">14.3 Production checklist<a class="anchor-link" href="#143-production-checklist" aria-label="Link to this section">#</a></h3>
+<ul>
+<li><input class="form-check-input me-2" type="checkbox" > Store served over <strong>HTTPS</strong> with a valid certificate; <code>baseUrl</code> starts with <code>https://</code></li>
+<li><input class="form-check-input me-2" type="checkbox" > A new, random API key (not the dev key) in both the module and the production build&#39;s <code>EXPO_PUBLIC_API_KEY</code></li>
+<li><input class="form-check-input me-2" type="checkbox" > CORS Origin empty</li>
+<li><input class="form-check-input me-2" type="checkbox" > 2FA off for customers (or app logins are accepted as unavailable)</li>
+<li><input class="form-check-input me-2" type="checkbox" > Reasonable session lifetime</li>
+<li><input class="form-check-input me-2" type="checkbox" > Web server access logs protected (the payment URL includes the token)</li>
+<li><input class="form-check-input me-2" type="checkbox" > <code>APP_BUNDLE_ID</code> set to your own ID (the production build refuses <code>com.example.*</code>)</li>
+<li><input class="form-check-input me-2" type="checkbox" > Optional: rate limiting on login, register and review routes at the web server or CDN</li>
+</ul>
+</section>
+<section class="doc-section">
+<h2 id="15-extending-the-app">15. Extending the app<a class="anchor-link" href="#15-extending-the-app" aria-label="Link to this section">#</a></h2>
+<p>Most features touch the same five places, in this order:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-plaintext">1. PHP endpoint      opencart-extension/mobile_api/catalog/controller/api/&lt;resource&gt;.php
+2. TS types          mobile/src/api/types.ts
+3. TS endpoint       mobile/src/api/endpoints.ts
+4. Screen / hook     mobile/src/screens/… (+ src/hooks/… if shared)
+5. Navigation        mobile/src/navigation/types.ts + RootNavigator.tsx</code></pre></div>
+<h3 id="151-recipe-add-a-new-screen-that-uses-an-existing-endpoint">15.1 Recipe: add a new screen that uses an existing endpoint<a class="anchor-link" href="#151-recipe-add-a-new-screen-that-uses-an-existing-endpoint" aria-label="Link to this section">#</a></h3>
+<p>Example: a <strong>Brands</strong> screen. <code>api.catalog.manufacturers()</code> already exists, but no screen uses it yet.</p>
+<p><strong>a. Add the route and its parameters</strong> in <code>src/navigation/types.ts</code>:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-typescript">export type RootStackParamList = {
+  // …
+  Brands: undefined;
+};</code></pre></div>
+<p><strong>b. Create the screen</strong> <code>src/screens/BrandsScreen.tsx</code>:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-typescript">import React from 'react';
+import { FlatList, Image, Pressable, StyleSheet, Text } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { api } from '../api/endpoints';
+import { EmptyState, ErrorState, Loading } from '../components/States';
+import type { RootStackParamList } from '../navigation/types';
+import { colors, font, radius, spacing } from '../theme';
+import { errorMessage } from '../utils/errors';
+
+type Props = NativeStackScreenProps&lt;RootStackParamList, 'Brands'&gt;;
+
+export default function BrandsScreen({ navigation }: Props) {
+  const query = useQuery({ queryKey: ['manufacturers'], queryFn: api.catalog.manufacturers, staleTime: 10 * 60 * 1000 });
+
+  if (query.isLoading) return &lt;Loading /&gt;;
+  if (query.error || !query.data) return &lt;ErrorState message={errorMessage(query.error)} onRetry={query.refetch} /&gt;;
+
+  return (
+    &lt;FlatList
+      data={query.data.manufacturers}
+      keyExtractor={(m) =&gt; String(m.manufacturer_id)}
+      numColumns={3}
+      contentContainerStyle={{ padding: spacing.md }}
+      ListEmptyComponent={&lt;EmptyState icon=&quot;pricetag-outline&quot; title=&quot;No brands yet&quot; /&gt;}
+      renderItem={({ item }) =&gt; (
+        &lt;Pressable
+          style={styles.cell}
+          onPress={() =&gt; navigation.navigate('ProductList', { title: item.name, query: { manufacturer_id: item.manufacturer_id } })}
+        &gt;
+          {item.image ? &lt;Image source={{ uri: item.image }} style={styles.logo} resizeMode=&quot;contain&quot; /&gt; : null}
+          &lt;Text style={styles.name} numberOfLines={1}&gt;{item.name}&lt;/Text&gt;
+        &lt;/Pressable&gt;
+      )}
+    /&gt;
+  );
+}
+
+const styles = StyleSheet.create({
+  cell: { flex: 1 / 3, alignItems: 'center', padding: spacing.sm, margin: spacing.xs, backgroundColor: colors.surface, borderRadius: radius.md },
+  logo: { width: 72, height: 72 },
+  name: { marginTop: spacing.xs, fontSize: font.small, color: colors.text },
+});</code></pre></div>
+<p>Conventions this follows:</p>
+<ul>
+<li>Typed props.</li>
+<li><code>Loading</code>, <code>ErrorState</code> and <code>EmptyState</code> for the three non-happy states.</li>
+<li>Colours and sizes only from <code>theme</code>.</li>
+<li><code>StyleSheet.create</code> at the bottom of the file.</li>
+<li>Navigation to an existing screen with typed parameters.</li>
+</ul>
+<p><strong>c. Register it</strong> in <code>RootNavigator.tsx</code>:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-typescript">import BrandsScreen from '../screens/BrandsScreen';
+// …
+&lt;Stack.Screen name=&quot;Brands&quot; component={BrandsScreen} options={{ title: 'Brands' }} /&gt;</code></pre></div>
+<p><strong>d. Link to it</strong>, for example from the Account screen with <code>ListItem</code>, or from Home with <code>SectionHeader action=&quot;See all&quot; onAction={() =&gt; navigation.navigate(&#39;Brands&#39;)}</code>.</p>
+<p><strong>e. Check:</strong> <code>npm run typecheck</code>, then open the screen in Expo Go.</p>
+<p>To add a <strong>tab</strong> instead, add the name to <code>TabParamList</code>, add an icon pair to <code>tabIcons</code> and add a <code>&lt;Tab.Screen&gt;</code> in <code>Tabs()</code>. Keep the tab count at five or fewer.</p>
+<h3 id="152-recipe-add-a-new-api-endpoint">15.2 Recipe: add a new API endpoint<a class="anchor-link" href="#152-recipe-add-a-new-api-endpoint" aria-label="Link to this section">#</a></h3>
+<p>Example: <code>catalog.manufacturer</code> (one brand&#39;s details).</p>
+<p><strong>a. PHP</strong>: add a method to <code>catalog/controller/api/catalog.php</code> and document it in the class docblock:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-php">/**
+ * GET extension/mobile_api/api/catalog.manufacturer&amp;manufacturer_id=8
+ *
+ * @return void
+ */
+public function manufacturer(): void {
+	if (!$this-&gt;guard()) {          // 1. always first
+		return;
+	}
+
+	$this-&gt;load-&gt;model('catalog/manufacturer');   // 2. reuse core models
+
+	$info = $this-&gt;model_catalog_manufacturer-&gt;getManufacturer((int)$this-&gt;query('manufacturer_id', 0));   // 3. cast input
+
+	if (!$info) {
+		$this-&gt;fail('Brand not found.', [], 404);   // 4. fail() with a proper status
+		return;
+	}
+
+	$this-&gt;ok([                                    // 5. ok() with decoded, typed values
+		'manufacturer_id' =&gt; (int)$info['manufacturer_id'],
+		'name'            =&gt; $this-&gt;decode($info['name']),
+		'image'           =&gt; $info['image'] ? $this-&gt;image($info['image'], 300, 300) : ''
+	]);
+}</code></pre></div>
+<p>Rules for every endpoint:</p>
+<ul>
+<li><strong>Call <code>guard()</code> or <code>guardCustomer()</code> first</strong> and return if it fails.</li>
+<li>Read input only through <code>post()</code> / <code>query()</code> and cast it (<code>(int)</code>, <code>(string)</code>).</li>
+<li>Use core models. Write SQL only if no model exists, and then always use <code>$this-&gt;db-&gt;escape()</code> and <code>(int)</code> casts.</li>
+<li>Never accept prices, totals or customer IDs from the client. Read the customer from <code>$this-&gt;customer</code>.</li>
+<li>Return through <code>ok()</code> / <code>fail()</code> only. Never <code>echo</code>.</li>
+<li>Decode text with <code>decode()</code> / <code>t()</code>. Cast numbers and booleans so the JSON types are stable.</li>
+<li>Use <code>productCard()</code> for any product list and <code>image()</code> for images.</li>
+<li>Respect <code>canSeePrice()</code> whenever you output a price.</li>
+<li>If the endpoint changes the cart, reset checkout methods (see <code>cart.php</code> → <code>resetCheckout()</code>).</li>
+</ul>
+<p>New file instead of a new method? Create <code>catalog/controller/api/&lt;name&gt;.php</code> with the namespace <code>Opencart\Catalog\Controller\Extension\MobileApi\Api</code> and class name <code>&lt;Name&gt;</code> extending <code>\Opencart\System\Library\Extension\MobileApi\ApiController</code>. The route is then <code>extension/mobile_api/api/&lt;name&gt;.&lt;method&gt;</code>. No registration is needed; OpenCart&#39;s router finds it.</p>
+<p><strong>b. Types</strong>, in <code>src/api/types.ts</code>:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-typescript">export interface ManufacturerDetail {
+  manufacturer_id: number;
+  name: string;
+  image: string;
+}</code></pre></div>
+<p><strong>c. Endpoint function</strong>, in <code>src/api/endpoints.ts</code>, inside the <code>catalog</code> group:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-typescript">manufacturer: (manufacturer_id: number) =&gt; request&lt;ManufacturerDetail&gt;('catalog.manufacturer', { query: { manufacturer_id } }),</code></pre></div>
+<p>For a POST, pass <code>{ body: {...} }</code>. <code>request()</code> switches to POST and JSON automatically.</p>
+<p><strong>d. Deploy the PHP</strong>: copy the file into <code>store/extension/mobile_api/…</code> for local testing, or rebuild the zip (§7.5).</p>
+<p><strong>e. Test it directly</strong> before building UI:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-bash">curl -s -H &quot;X-Api-Key: &lt;key&gt;&quot; &quot;http://localhost:8090/index.php?route=extension/mobile_api/api/catalog.manufacturer&amp;manufacturer_id=8&quot; | python3 -m json.tool</code></pre></div>
+<h3 id="153-recipe-add-a-section-to-the-home-screen">15.3 Recipe: add a section to the Home screen<a class="anchor-link" href="#153-recipe-add-a-section-to-the-home-screen" aria-label="Link to this section">#</a></h3>
+<p>Example: a &quot;Brands&quot; carousel on Home.</p>
+<ol>
+<li><p><strong>Server</strong>: in <code>catalog.php</code> → <code>home()</code>, build the list and add it to the <code>ok([...])</code> array:</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-php">$this-&gt;load-&gt;model('catalog/manufacturer');
+$brands = [];
+foreach (array_slice($this-&gt;model_catalog_manufacturer-&gt;getManufacturers(), 0, $limit) as $m) {
+    $brands[] = ['manufacturer_id' =&gt; (int)$m['manufacturer_id'], 'name' =&gt; $this-&gt;decode($m['name']), 'image' =&gt; $m['image'] ? $this-&gt;image($m['image'], 200, 200) : ''];
+}
+// …
+'brands' =&gt; $brands,</code></pre></div>
+<p>Old app versions ignore unknown fields, so <strong>adding</strong> fields is backwards compatible. Removing or renaming them isn&#39;t (see §15.6).</p>
+</li>
+<li><p><strong>Type</strong>: add <code>brands: Manufacturer[];</code> to <code>HomeData</code> in <code>types.ts</code>. Make it optional (<code>brands?: Manufacturer[]</code>) if the app must also work with stores running an older extension.</p>
+</li>
+<li><p><strong>UI</strong>: in <code>HomeScreen.tsx</code>, destructure <code>brands</code> and render a section the same way as the existing ones: a <code>SectionHeader</code> plus a horizontal <code>FlatList</code> or <code>ScrollView</code>. Hide it when the list is empty.</p>
+</li>
+<li><p><strong>Optional admin switch</strong>: add a setting such as <code>module_mobile_api_home_brands</code> (see §15.4) and only include <code>brands</code> when it&#39;s on.</p>
+</li>
+</ol>
+<p>Each home section is rendered only if its array has items, so a store can switch a section off by leaving it empty (for example, no featured IDs).</p>
+<h3 id="154-recipe-add-a-new-admin-setting">15.4 Recipe: add a new admin setting<a class="anchor-link" href="#154-recipe-add-a-new-admin-setting" aria-label="Link to this section">#</a></h3>
+<ol>
+<li><strong>Form field</strong>: add it to <code>admin/view/template/module/mobile_api.twig</code>. Use <code>name=&quot;module_mobile_api_&lt;name&gt;&quot;</code> and <code>id=&quot;input-&lt;name-with-dashes&gt;&quot;</code>, and add <code>&lt;div id=&quot;error-&lt;name-with-dashes&gt;&quot; class=&quot;invalid-feedback&quot;&gt;&lt;/div&gt;</code> if it can fail validation.</li>
+<li><strong>Labels</strong>: add <code>entry_&lt;name&gt;</code> and <code>help_&lt;name&gt;</code> to <code>admin/language/en-gb/module/mobile_api.php</code>.</li>
+<li><strong>Controller <code>index()</code></strong>: <code>$data[&#39;module_mobile_api_&lt;name&gt;&#39;] = $this-&gt;config-&gt;get(&#39;module_mobile_api_&lt;name&gt;&#39;) ?: &lt;default&gt;;</code></li>
+<li><strong>Controller <code>save()</code></strong>: validate it and add <code>$json[&#39;error&#39;][&#39;&lt;name&gt;&#39;] = …</code> on failure.</li>
+<li><strong>Controller <code>install()</code></strong>: add the default to the <code>editSetting</code> array, so new installs get it.</li>
+<li><strong>Use it</strong>: read it with <code>$this-&gt;config-&gt;get(&#39;module_mobile_api_&lt;name&gt;&#39;)</code> in a catalog endpoint. If the app needs it, add it to <code>common.init</code> (under <code>settings</code> or a new key), then to <code>InitData</code> in <code>types.ts</code>, and read it with <code>useStore().init</code>.</li>
+</ol>
+<p>Existing installs won&#39;t have the new key until the admin saves the form once, so <strong>always give it a fallback</strong> when you read it.</p>
+<h3 id="155-recipe-add-a-shared-data-hook">15.5 Recipe: add a shared data hook<a class="anchor-link" href="#155-recipe-add-a-shared-data-hook" aria-label="Link to this section">#</a></h3>
+<p>When several screens use the same data (like the cart):</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-typescript">// src/hooks/useAddresses.ts
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { api } from '../api/endpoints';
+
+export const addressesKey = ['addresses'] as const;
+
+export function useAddresses(enabled = true) {
+  return useQuery({ queryKey: addressesKey, queryFn: api.address.list, enabled });
+}
+
+export function useDeleteAddress() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: api.address.remove,
+    onSuccess: () =&gt; {
+      queryClient.invalidateQueries({ queryKey: addressesKey });
+      queryClient.invalidateQueries({ queryKey: ['checkout'] });   // checkout may show addresses
+    },
+  });
+}</code></pre></div>
+<p>Export the key, so other code can invalidate it without retyping the array.</p>
+<h3 id="156-compatibility-rules-app-versions-vs-extension-versions">15.6 Compatibility rules (app versions vs extension versions)<a class="anchor-link" href="#156-compatibility-rules-app-versions-vs-extension-versions" aria-label="Link to this section">#</a></h3>
+<p>Installed apps update slowly, but the server updates as soon as the store owner installs a new zip. So:</p>
+<ul>
+<li><strong>Add, don&#39;t change.</strong> Adding endpoints and response fields is safe. Renaming or removing fields breaks old apps.</li>
+<li>If you must change a shape, add a new field or endpoint, keep the old one for a while, and remove it later.</li>
+<li>New fields the app needs should be <strong>optional</strong> in <code>types.ts</code> when the app could talk to an older extension.</li>
+<li>Bump the version in <code>install.json</code> for each extension release and <code>version</code> in <code>app.config.ts</code> for each app release, and add an entry to <code>CHANGELOG.md</code>. Note in the release notes which extension version each app version needs.</li>
+</ul>
+<h3 id="157-adding-a-dependency">15.7 Adding a dependency<a class="anchor-link" href="#157-adding-a-dependency" aria-label="Link to this section">#</a></h3>
+<p>Use <code>npx expo install &lt;package&gt;</code>, not <code>npm install</code>. It picks the version that matches the current Expo SDK. If the package has native code not included in Expo Go, you need a development build (§6). Check with <code>npx expo-doctor</code>.</p>
+</section>
+<section class="doc-section">
+<h2 id="16-checking-your-changes">16. Checking your changes<a class="anchor-link" href="#16-checking-your-changes" aria-label="Link to this section">#</a></h2>
+<p>CI (<code>.github/workflows/ci.yml</code>) runs on every push and pull request: the app checks, <code>expo-doctor</code>, a production bundle for iOS and Android, a PHP syntax check on PHP 8.0 and 8.3, and the extension package as a downloadable artifact. Run the same locally with <code>make check</code>.</p>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Check</th><th scope="col">Command</th><th scope="col">Catches</th></tr></thead><tbody><tr><td>All app checks</td><td><code>cd mobile &amp;&amp; npm run check</code></td><td>Type-check, ESLint (including the React Hooks rules), Prettier and unit tests</td></tr>
+<tr><td>Unit tests</td><td><code>cd mobile &amp;&amp; npm test</code></td><td>Colour maths and contrast (<code>theme.ts</code>), configuration checks (<code>config.ts</code>), URL building, headers, envelope and error handling (<code>client.ts</code>)</td></tr>
+<tr><td>Types</td><td><code>cd mobile &amp;&amp; npm run typecheck</code></td><td>API and navigation contract mismatches, typos</td></tr>
+<tr><td>Bundle</td><td><code>cd mobile &amp;&amp; npx expo export --platform ios --output-dir /tmp/oc-export</code></td><td>Import errors and syntax the type checker misses</td></tr>
+<tr><td>Dependencies</td><td><code>cd mobile &amp;&amp; npx expo-doctor</code></td><td>SDK version mismatches</td></tr>
+<tr><td>PHP syntax</td><td><code>make php-lint</code> (add <code>PHP_IMAGE=php:8.0-cli</code> for the oldest supported PHP)</td><td>Parse errors</td></tr>
+<tr><td>PHP runtime</td><td><code>docker compose logs -f web</code> while using the app</td><td>Warnings, notices and fatal errors</td></tr>
+<tr><td>Endpoint</td><td><code>curl</code> with <code>X-Api-Key</code> (see §15.2)</td><td>Wrong output shape or status</td></tr>
+<tr><td>Manual flow</td><td>Expo Go on a real phone</td><td>Behaviour, layout, keyboard and safe areas</td></tr></tbody></table></div>
+<p><strong>Manual regression list</strong> for changes that touch the cart, checkout or auth:</p>
+<ol>
+<li>Browse Home → category → product with options → add to cart.</li>
+<li>Change quantity, apply an invalid coupon (rejected) and a valid one.</li>
+<li>Guest checkout with Flat Rate + Cash on Delivery → order placed, cart empty.</li>
+<li>Register → log out → log in (a wrong password is rejected) → cart merge.</li>
+<li>Logged-in checkout with a saved address.</li>
+<li>Orders → order details → Buy again.</li>
+<li>Change currency → prices update.</li>
+<li>Wishlist as a guest → log in → items moved to the account.</li>
+<li>Admin: change a colour → reopen the app → colour applied.</li>
+</ol>
+<p>Unit tests live in <code>mobile/src/__tests__/*.test.ts</code>. Modules that keep state (<code>theme.ts</code>, <code>client.ts</code>, <code>config.ts</code>) are loaded fresh per test with <code>jest.isolateModules</code>. Good next steps: a scripted HTTP test that runs the regression flow above against the Docker store, and component tests with React Native Testing Library.</p>
+</section>
+<section class="doc-section">
+<h2 id="17-building-and-releasing">17. Building and releasing<a class="anchor-link" href="#17-building-and-releasing" aria-label="Link to this section">#</a></h2>
+<h3 id="171-extension">17.1 Extension<a class="anchor-link" href="#171-extension" aria-label="Link to this section">#</a></h3>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-bash"># bump &quot;version&quot; in opencart-extension/mobile_api/install.json and add a CHANGELOG.md entry
+make extension                          # PHP lint + opencart-extension/mobile_api.ocmod.zip</code></pre></div>
+<p>On the store: Extensions → Installer → Upload, then Install. Updating an installed extension in OpenCart 4 means uninstalling and reinstalling it. <strong>The module uninstall removes the settings (including the API key)</strong>, so note the key and colours first, or update the files on the server directly when only PHP files changed.</p>
+<h3 id="172-app-eas">17.2 App (EAS)<a class="anchor-link" href="#172-app-eas" aria-label="Link to this section">#</a></h3>
+<p><code>mobile/eas.json</code> already defines the <code>development</code>, <code>preview</code> and <code>production</code> profiles (§13.2).</p>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-bash">npm install -g eas-cli
+cd mobile
+eas login
+eas init                                # links the project; set EAS_PROJECT_ID to the id it prints
+eas build --platform all --profile production
+eas submit --platform ios               # and --platform android</code></pre></div>
+<p>Before the first store build (the README has the full list):</p>
+<ul>
+<li>Set <code>APP_BUNDLE_ID</code> (and <code>APP_NAME</code>) for the production profile. The build stops while it is <code>com.example.*</code>.</li>
+<li>Set <code>EXPO_PUBLIC_STORE_URL</code> to the production <strong>HTTPS</strong> store and <code>EXPO_PUBLIC_API_KEY</code> to a new production key.</li>
+<li>Replace <code>mobile/assets/</code> with your branding, or edit and run <code>npm run icons</code>.</li>
+</ul>
+<p><strong>Over-the-air updates:</strong> <code>eas update --channel production</code> ships JavaScript changes without store review. Changes to native modules, native settings in <code>app.config.ts</code>, or the SDK version need a new build.</p>
+<h3 id="173-upgrading-the-expo-sdk">17.3 Upgrading the Expo SDK<a class="anchor-link" href="#173-upgrading-the-expo-sdk" aria-label="Link to this section">#</a></h3>
+<div class="code-block position-relative mb-4"><button type="button" class="btn btn-sm btn-outline-secondary copy-btn">Copy</button><pre><code class="language-bash">cd mobile
+npx expo install expo@^&lt;next&gt;           # e.g. ^59.0.0
+npx expo install --fix                  # aligns react, react-native and all expo-* packages
+npx expo-doctor
+npm run check
+npx expo start -c</code></pre></div>
+<p>Read the SDK release notes for breaking changes. The last upgrade (SDK 52 → 58, React 18 → 19) needed small type fixes: list header and footer props must be <code>undefined</code> instead of <code>null</code>, and some callbacks needed explicit <code>void</code> returns. If <code>npm</code> reports <code>ERESOLVE</code>, delete <code>node_modules</code> and <code>package-lock.json</code> and reinstall.</p>
+</section>
+<section class="doc-section">
+<h2 id="18-troubleshooting">18. Troubleshooting<a class="anchor-link" href="#18-troubleshooting" aria-label="Link to this section">#</a></h2>
+<div class="table-responsive mb-4"><table class="table table-sm table-striped table-hover align-middle"><thead class="table-light"><tr><th scope="col">Symptom</th><th scope="col">Cause</th><th scope="col">Fix</th></tr></thead><tbody><tr><td>Expo Go: <strong>&quot;No usable data&quot;</strong> after scanning</td><td>The project&#39;s SDK isn&#39;t supported by the installed Expo Go</td><td>Upgrade the SDK (§17.3) or update Expo Go</td></tr>
+<tr><td><strong>&quot;Something went wrong&quot; / &quot;Cannot reach the store&quot;</strong> on the phone</td><td><code>baseUrl</code> uses <code>localhost</code>, a wrong IP, or the phone is on another network</td><td>Use the computer&#39;s LAN IP, the same Wi-Fi, and check that port 8090 is published</td></tr>
+<tr><td>&quot;Unexpected response from the store (HTTP 200/404/500)&quot;</td><td>Extension not installed or disabled, a PHP error, or <code>baseUrl</code> set to the API URL instead of the store URL</td><td>Check the module status; <code>docker compose logs web</code>; <code>baseUrl</code> must be the storefront root</td></tr>
+<tr><td><code>Invalid API key.</code> (401)</td><td>Key mismatch</td><td>Copy the key from the module page into <code>EXPO_PUBLIC_API_KEY</code> in <code>mobile/.env</code>, then <code>npx expo start -c</code></td></tr>
+<tr><td>Start screen: &quot;The store address is not set&quot; / &quot;API key is missing&quot;</td><td><code>mobile/.env</code> missing or not loaded</td><td>Copy <code>mobile/.env.example</code> to <code>mobile/.env</code>, fill it in, restart with <code>npx expo start -c</code></td></tr>
+<tr><td>Release build: &quot;must use an https:// store address&quot;</td><td>Production build pointed at <code>http://</code></td><td>Use the HTTPS store URL in the production build&#39;s environment</td></tr>
+<tr><td><code>The mobile API is disabled.</code> (503)</td><td>Status off</td><td>Turn on Status and save</td></tr>
+<tr><td>Login: &quot;Two-factor authentication is enabled…&quot;</td><td><code>config_2fa</code> on</td><td>Turn off 2FA in System → Settings → Option</td></tr>
+<tr><td>Cart empties or user logged out every request</td><td>Session not restored: the startup is missing, or a proxy strips custom headers</td><td>Check System → Settings → Startups for <code>mobile_api</code> (reinstall the module if missing); allow <code>X-Session-Token</code> and <code>X-Api-Key</code> through the proxy or CDN</td></tr>
+<tr><td>Images don&#39;t load on the phone</td><td>Image URLs use <code>localhost</code></td><td>Dev: <code>config.php</code> uses the request <code>Host</code> (§7.2). Production: set the store URL to the public HTTPS domain.</td></tr>
+<tr><td>Admin colour change not visible</td><td>Colours apply at launch</td><td>Close and reopen the app (or shake → Reload)</td></tr>
+<tr><td><code>Cannot find module &#39;./utils/env&#39;</code> from the Expo CLI</td><td>A stale dev server after upgrading dependencies</td><td>Stop it and run <code>npx expo start -c</code></td></tr>
+<tr><td>Product can&#39;t be added: &quot;File required!&quot;</td><td>The product has a required file-upload option</td><td>Not supported in the app (§19)</td></tr>
+<tr><td>Online payment never returns to the app</td><td>The gateway&#39;s success page uses an unusual URL</td><td>Check the URL the WebView reaches and extend the <code>SUCCESS</code> regex in <code>PaymentScreen.tsx</code></td></tr>
+<tr><td>Expo web: requests blocked by CORS</td><td>CORS Origin not set</td><td>Set it to <code>http://localhost:8081</code> (or <code>*</code> for testing)</td></tr></tbody></table></div>
+</section>
+<section class="doc-section">
+<h2 id="19-known-limitations-and-future-work">19. Known limitations and future work<a class="anchor-link" href="#19-known-limitations-and-future-work" aria-label="Link to this section">#</a></h2>
+<ul>
+<li><strong>File-upload product options</strong> aren&#39;t supported. The product page tells the customer to order that product on the website. Future work: an upload endpoint using <code>expo-document-picker</code> and core <code>tool/upload</code>.</li>
+<li><strong>Captcha</strong> isn&#39;t applied to API registration and reviews (§14.2).</li>
+<li><strong>2FA</strong> must be off for app logins.</li>
+<li><strong>Single store only</strong> (<code>store_id</code> 0).</li>
+<li><strong>One language per build</strong> (<code>config.language</code>). The API already returns <code>languages</code> in <code>init</code>, so adding a language picker would mirror the currency picker.</li>
+<li><strong>Theme changes need an app restart</strong> (§9.2).</li>
+<li><strong>Light mode only</strong> (<code>userInterfaceStyle: light</code>).</li>
+<li><strong>No push notifications</strong> yet. <code>expo-notifications</code> plus an OpenCart event on order status change would add them.</li>
+<li><strong>Unit tests cover the logic only</strong> (theme, config, API client). There are no component or end-to-end tests yet (§16).</li>
+<li><strong>Rewards, store credit and gift vouchers</strong> are applied only as far as the core totals do automatically. There&#39;s no UI to enter reward points or vouchers.</li>
+</ul>
+</section>
+
+
+      <footer class="text-body-secondary small py-4">
+        Generated from <code>docs/DEVELOPER.md</code> on 2026-11-13. Edit the Markdown file, then rebuild with <code>docs/build-html.cjs</code>.
+      </footer>
+    </main>
+  </div>
+</div>
+
+<a id="backToTop" href="#top" class="btn btn-primary rounded-circle shadow" aria-label="Back to top"><i class="bi bi-arrow-up"></i></a>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/languages/typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/languages/php.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.min.js"></script>
+<script>
+(function () {
+  var root = document.documentElement;
+
+  function storedTheme() {
+    try { return localStorage.getItem('oc-docs-theme'); } catch (e) { return null; }
+  }
+  function saveTheme(t) {
+    try { localStorage.setItem('oc-docs-theme', t); } catch (e) {}
+  }
+
+  function renderDiagrams(theme) {
+    if (!window.mermaid) return;
+    document.querySelectorAll('pre.mermaid').forEach(function (el) {
+      el.removeAttribute('data-processed');
+      el.textContent = el.getAttribute('data-src');
+    });
+    mermaid.initialize({ startOnLoad: false, theme: theme === 'dark' ? 'dark' : 'default', securityLevel: 'strict' });
+    mermaid.run({ querySelector: 'pre.mermaid' }).catch(function () {});
+  }
+
+  function applyTheme(theme) {
+    root.setAttribute('data-bs-theme', theme);
+    document.getElementById('hljs-light').disabled = theme === 'dark';
+    document.getElementById('hljs-dark').disabled = theme !== 'dark';
+    document.getElementById('themeToggle').innerHTML = theme === 'dark' ? '<i class="bi bi-sun"></i>' : '<i class="bi bi-moon-stars"></i>';
+    document.querySelectorAll('.doc-hero .badge, thead.table-light').forEach(function (el) {
+      if (el.tagName === 'THEAD') { el.classList.toggle('table-light', theme !== 'dark'); el.classList.toggle('table-dark', theme === 'dark'); }
+      else { el.classList.toggle('text-bg-light', theme !== 'dark'); el.classList.toggle('text-bg-dark', theme === 'dark'); }
+    });
+    renderDiagrams(theme);
+  }
+
+  var initial = storedTheme() || (window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(initial);
+
+  document.getElementById('themeToggle').addEventListener('click', function () {
+    var next = root.getAttribute('data-bs-theme') === 'dark' ? 'light' : 'dark';
+    saveTheme(next);
+    applyTheme(next);
+  });
+
+  // Syntax highlighting
+  if (window.hljs) {
+    document.querySelectorAll('pre code:not(.language-plaintext)').forEach(function (el) { hljs.highlightElement(el); });
+  }
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentElement.querySelector('code').innerText;
+      navigator.clipboard.writeText(code).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      });
+    });
+  });
+
+  // Sidebar filter
+  var filter = document.getElementById('tocFilter');
+  filter.addEventListener('input', function () {
+    var q = filter.value.trim().toLowerCase();
+    document.querySelectorAll('#toc .nav-link').forEach(function (a) {
+      a.classList.toggle('hidden-by-filter', q !== '' && a.textContent.toLowerCase().indexOf(q) === -1);
+    });
+    document.querySelectorAll('#toc .toc-sub').forEach(function (sub) {
+      sub.style.display = q ? 'flex' : '';
+    });
+  });
+
+  // Close the mobile sidebar after choosing a section
+  var sidebar = document.getElementById('sidebar');
+  document.querySelectorAll('#toc .nav-link').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var oc = bootstrap.Offcanvas.getInstance(sidebar);
+      if (oc) oc.hide();
+    });
+  });
+
+  // Back to top
+  var toTop = document.getElementById('backToTop');
+  window.addEventListener('scroll', function () {
+    toTop.style.display = window.scrollY > 800 ? 'inline-flex' : 'none';
+  }, { passive: true });
+
+  // External links open in a new tab
+  document.querySelectorAll('main a[href^="http"]').forEach(function (a) { a.target = '_blank'; a.rel = 'noopener'; });
+})();
+</script>
+</body>
+</html>

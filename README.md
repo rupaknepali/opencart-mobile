@@ -331,5 +331,6 @@ Report vulnerabilities and find the production checklist in [SECURITY.md](SECURI
 - [Developer guide](docs/DEVELOPER.md): architecture, tools and why they were chosen, design patterns, hooks, every user flow, configuration, security, and how to extend the app.
   - [HTML version](docs/developer-guide.html): open it in a browser.
   - [WordPress import](docs/developer-guide.wordpress.xml): a 5-part series of draft posts with SEO titles and meta descriptions. Import it with **Tools → Import → WordPress**. The featured images and how to attach them are in [docs/featured-images/](docs/featured-images/).
+- [README as a WordPress post](docs/readme-post.wordpress.xml): this page as one draft post introducing the project, with GitHub links and buttons, linked to the guide series. Rebuild it with `cd docs && npm run build:readme-post` after changing the README.
 - [CHANGELOG.md](CHANGELOG.md): release notes.
 - [SECURITY.md](SECURITY.md): reporting vulnerabilities and the production checklist.

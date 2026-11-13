@@ -1,0 +1,643 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Generated from README.md by docs/build-readme-post.cjs on 2026-11-13.
+     Import with WordPress admin → Tools → Import → WordPress. Creates one draft post. -->
+<rss version="2.0"
+  xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:wp="http://wordpress.org/export/1.2/">
+<channel>
+  <title><![CDATA[OpenCart Mobile App: a Native iOS and Android App for OpenCart 4.1.0.4]]></title>
+  <link>https://example.com</link>
+  <description><![CDATA[A native iOS and Android shopping app for OpenCart 4.1.0.4 stores, built with Expo and React Native, with its own Mobile App API extension. Code on GitHub.]]></description>
+  <pubDate>Fri, 13 Nov 2026 05:13:00 GMT</pubDate>
+  <language>en-US</language>
+  <wp:wxr_version>1.2</wp:wxr_version>
+  <wp:base_site_url>https://example.com</wp:base_site_url>
+  <wp:base_blog_url>https://example.com</wp:base_blog_url>
+
+  <wp:author>
+    <wp:author_id>1</wp:author_id>
+    <wp:author_login><![CDATA[admin]]></wp:author_login>
+    <wp:author_email><![CDATA[]]></wp:author_email>
+    <wp:author_display_name><![CDATA[admin]]></wp:author_display_name>
+    <wp:author_first_name><![CDATA[]]></wp:author_first_name>
+    <wp:author_last_name><![CDATA[]]></wp:author_last_name>
+  </wp:author>
+
+  <wp:category>
+    <wp:term_id>9001</wp:term_id>
+    <wp:category_nicename><![CDATA[opencart-mobile-app]]></wp:category_nicename>
+    <wp:category_parent><![CDATA[]]></wp:category_parent>
+    <wp:cat_name><![CDATA[OpenCart Mobile App]]></wp:cat_name>
+  </wp:category>
+  <wp:tag><wp:term_id>9201</wp:term_id><wp:tag_slug><![CDATA[opencart]]></wp:tag_slug><wp:tag_name><![CDATA[OpenCart]]></wp:tag_name></wp:tag>
+  <wp:tag><wp:term_id>9202</wp:term_id><wp:tag_slug><![CDATA[react-native]]></wp:tag_slug><wp:tag_name><![CDATA[React Native]]></wp:tag_name></wp:tag>
+  <wp:tag><wp:term_id>9203</wp:term_id><wp:tag_slug><![CDATA[expo]]></wp:tag_slug><wp:tag_name><![CDATA[Expo]]></wp:tag_name></wp:tag>
+  <wp:tag><wp:term_id>9204</wp:term_id><wp:tag_slug><![CDATA[ecommerce-app]]></wp:tag_slug><wp:tag_name><![CDATA[Ecommerce App]]></wp:tag_name></wp:tag>
+  <wp:tag><wp:term_id>9205</wp:term_id><wp:tag_slug><![CDATA[github]]></wp:tag_slug><wp:tag_name><![CDATA[GitHub]]></wp:tag_name></wp:tag>
+
+  <item>
+    <title><![CDATA[OpenCart Mobile App: a Native iOS and Android App for OpenCart 4.1.0.4]]></title>
+    <link>https://example.com/?name=opencart-mobile-app</link>
+    <pubDate>Fri, 13 Nov 2026 05:13:00 GMT</pubDate>
+    <dc:creator><![CDATA[admin]]></dc:creator>
+    <guid isPermaLink="false">https://example.com/?name=opencart-mobile-app</guid>
+    <description></description>
+    <content:encoded><![CDATA[<!-- wp:paragraph -->
+<p>A native iOS and Android shopping app for <strong>OpenCart 4.1.0.4</strong> stores, built with Expo, React Native and TypeScript. All of its data comes from your store through the <strong>Mobile App API</strong> extension included in <a href="https://github.com/rupaknepali/opencart-mobile">the GitHub repository</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Shopping:</strong> catalog, search, products with every option type, cart, wishlist and checkout, with the same prices, taxes, stock rules and coupons as your website.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Payments:</strong> every installed OpenCart payment and shipping extension works. Cash on Delivery, Bank Transfer, Cheque and Free Checkout complete inside the app; online gateways run in a secure in-app web view.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Accounts:</strong> customer accounts, address book and order history, shared with the website.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Branding:</strong> the app&#39;s colours are set from the OpenCart admin.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:buttons -->
+<div class="wp-block-buttons"><!-- wp:button -->
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://github.com/rupaknepali/opencart-mobile">View on GitHub</a></div>
+<!-- /wp:button -->
+
+<!-- wp:button {"className":"is-style-outline"} -->
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://github.com/rupaknepali/opencart-mobile/archive/refs/heads/main.zip">Download ZIP</a></div>
+<!-- /wp:button --></div>
+<!-- /wp:buttons -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="contents">Contents</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><a href="#features">Features</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#how-it-works">How it works</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#requirements">Requirements</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#getting-started">Getting started</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#configuration">Configuration</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#project-structure">Project structure</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#development">Development</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#releasing">Releasing</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#api-reference">API reference</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#security">Security</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#known-limitations">Known limitations</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="#documentation">Documentation</a></li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="features">Features</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Area</th><th>What the app does</th></tr></thead><tbody><tr><td>Home</td><td>Banner carousel (taps open the linked product or category), categories, and featured, special, new and bestselling products</td></tr><tr><td>Catalog</td><td>Category tree, product lists with infinite scroll, sorting and category filters, search, specials</td></tr><tr><td>Product</td><td>Image gallery, price, special and tax, quantity discounts, stock, every option type (select, radio, checkbox, image swatches, text, textarea, date and time), subscription plans, specifications, related products, sharing</td></tr><tr><td>Reviews</td><td>Read reviews and write one, following the store&#39;s review rules</td></tr><tr><td>Cart</td><td>The same cart as the website for logged-in customers; quantities, coupons, totals, stock and minimum-quantity warnings</td></tr><tr><td>Wishlist</td><td>Works for guests and moves into the account at login</td></tr><tr><td>Checkout</td><td>Guest or logged in, saved or new addresses, payment address if the store requires one, live shipping quotes, payment methods, comments, terms</td></tr><tr><td>Payments</td><td>Cash on Delivery, Bank Transfer, Cheque and Free Checkout in the app; any other gateway (PayPal, Stripe, …) in the store&#39;s own payment form inside a web view</td></tr><tr><td>Account</td><td>Register, log in, forgotten password, edit details, change password, newsletter, address book, order history with status and &quot;buy again&quot;</td></tr><tr><td>Store</td><td>Currency switcher, information pages, call or email the store</td></tr><tr><td>Branding</td><td>Primary, secondary, header, font and button colours set in the OpenCart admin, with automatic text contrast</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="how-it-works">How it works</h2>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<pre class="wp-block-code alignwide" style="white-space:pre;overflow-x:auto;font-size:.8em;line-height:1.45"><code> Phone (Expo / React Native app)                      OpenCart 4.1.0.4 server
+┌──────────────────────────────────┐   HTTPS + JSON   ┌───────────────────────────────────────┐
+│ Screens → React Query → API client├─────────────────►│ Mobile App API extension              │
+│ Session token in the secure store │  X-Api-Key       │  → OpenCart's own models, cart,       │
+│ Web view for online payments      │  X-Session-Token │    checkout, shipping, payment, totals │
+└──────────────────────────────────┘                  └───────────────────────────────────────┘</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The server holds the cart, the checkout progress and the login, in the normal OpenCart session. The app sends that session&#39;s ID in a header instead of a cookie.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>Why an extension?</strong> OpenCart&#39;s built-in API was designed for the admin panel&#39;s order editor, not for shoppers:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Only <code>api/order</code> and <code>api/subscription</code> can be called. Every other <code>api/*</code> route returns 403.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Each request needs an HMAC-SHA1 signature with a secret key and must come from a whitelisted IP address. A public app can&#39;t keep that secret, and phone IP addresses can&#39;t be whitelisted.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>It has no endpoints for products, categories, customer login, wishlist or order history.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>It trusts posted values such as the shipping cost, which is safe for an admin but not for the public.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>The Mobile App API extension adds the customer-facing endpoints. It uses OpenCart&#39;s own models and controllers, so the app and the website always agree on prices, taxes, specials, discounts, stock and coupons. Where the core API is safe, the extension reuses it: adding to the cart goes through <code>api/cart.addProduct</code>, and totals come from <code>api/cart.getTotals</code>. The client never sends prices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="requirements">Requirements</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>For</th><th>You need</th></tr></thead><tbody><tr><td>The extension</td><td>OpenCart <strong>4.1.0.4</strong>, PHP 8.0 or newer</td></tr><tr><td>The app</td><td>Node.js 20.19 or newer; Expo Go on a phone, or the iOS Simulator / an Android emulator</td></tr><tr><td>The local dev store</td><td>Docker Desktop (or Docker Engine with Compose v2)</td></tr><tr><td>Store releases</td><td>An <a href="https://expo.dev">Expo</a> account (EAS Build), Apple Developer and Google Play accounts, and an <strong>HTTPS</strong> store</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="getting-started">Getting started</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="1-local-dev-store-optional">1. Local dev store (optional)</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Skip this step if you already have an OpenCart 4.1.0.4 store to test against.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre class="wp-block-code alignwide" style="white-space:pre;overflow-x:auto;font-size:.8em;line-height:1.45"><code>cp .env.example .env     # set every password in it first
+make store               # downloads OpenCart 4.1.0.4 into ./store, installs it with demo data</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>That gives you a storefront at <a href="http://localhost:8090/">http://localhost:8090/</a> and an admin at <a href="http://localhost:8090/admin/">http://localhost:8090/admin/</a>, with the credentials from <code>.env</code>. Afterwards, <code>make up</code> and <code>make down</code> start and stop it; the database is kept in a Docker volume.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>To test on a <strong>real phone over Wi-Fi</strong>, set <code>STORE_BIND_ADDRESS=0.0.0.0</code> in <code>.env</code> and run <code>make up</code> again. Anyone on the same network can then reach the store <strong>and its admin</strong>, so only do this on a network you trust.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="2-install-the-mobile-app-api-extension">2. Install the Mobile App API extension</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li>Build the package: <code>make extension</code> (or <code>sh opencart-extension/build.sh</code>). CI also attaches it to every run.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>In the admin, go to <strong>Extensions → Installer</strong>, upload <code>opencart-extension/mobile_api.ocmod.zip</code> and click <strong>Install</strong>.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Go to <strong>Extensions → Extensions → Modules → Mobile App API</strong>, click <strong>Install (+)</strong>, then <strong>Edit</strong>.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Turn on <strong>Status</strong>, copy the <strong>API Key</strong>, and save. The other settings are described under <a href="#configuration">Configuration</a>.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="3-run-the-app">3. Run the app</h3>
+<!-- /wp:heading -->
+
+<!-- wp:code {"align":"wide"} -->
+<pre class="wp-block-code alignwide"><code>cd mobile
+npm ci
+cp .env.example .env     # then set the store URL and API key (below)
+npx expo start -c</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:paragraph -->
+<p>In <code>mobile/.env</code>:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre class="wp-block-code alignwide" style="white-space:pre;overflow-x:auto;font-size:.8em;line-height:1.45"><code>EXPO_PUBLIC_STORE_URL=http:&#47;&#47;192.168.0.10:8090/    # your store; see the table below
+EXPO_PUBLIC_API_KEY=paste-the-key-from-the-module-settings</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Running the app on</th><th>Store URL for the local dev store</th></tr></thead><tbody><tr><td>A real phone (Expo Go)</td><td><code>http://&lt;your computer&#39;s LAN IP&gt;:8090/</code> (macOS: <code>ipconfig getifaddr en0</code>)</td></tr><tr><td>iOS Simulator</td><td><code>http://localhost:8090/</code></td></tr><tr><td>Android emulator</td><td><code>http://10.0.2.2:8090/</code></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>Then scan the QR code with the iPhone Camera or the Expo Go app, or press <code>i</code> / <code>a</code> for a simulator. If the store URL or API key is missing or wrong, the app says so on its start screen. Restart with <code>npx expo start -c</code> after changing <code>.env</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="configuration">Configuration</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="app-mobileenv">App: <code>mobile/.env</code></h3>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Variable</th><th>Required</th><th>Notes</th></tr></thead><tbody><tr><td><code>EXPO_PUBLIC_STORE_URL</code></td><td>yes</td><td>The <strong>storefront</strong> URL, not the API URL. Release builds require <code>https://</code>.</td></tr><tr><td><code>EXPO_PUBLIC_API_KEY</code></td><td>yes</td><td>From the module settings page</td></tr><tr><td><code>EXPO_PUBLIC_LANGUAGE</code></td><td>no</td><td>An installed store language code; default <code>en-gb</code></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>These values are compiled into the app, so they are <strong>not secret</strong>; that includes the API key. See <a href="#security">Security</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="extension-settings-extensions--modules--mobile-app-api">Extension settings (Extensions → Modules → Mobile App API)</h3>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Setting</th><th>Effect</th></tr></thead><tbody><tr><td>Status</td><td>Turns the API on or off. While off, every endpoint returns 503.</td></tr><tr><td>API Key</td><td>Must match <code>EXPO_PUBLIC_API_KEY</code>. Use a different key for production.</td></tr><tr><td>CORS Origin</td><td>Only for testing in a web browser (<code>npx expo start --web</code>). Leave empty otherwise.</td></tr><tr><td>Home Banner</td><td>Banner group shown on the home screen</td></tr><tr><td>Featured Product IDs</td><td>Comma-separated, e.g. <code>40,42,30</code></td></tr><tr><td>Products per Home Section, Product Image Size</td><td>Home screen and list layout</td></tr><tr><td>App Colours</td><td>See below. The app applies them the next time it is opened.</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Colour</th><th>Used for</th></tr></thead><tbody><tr><td>Primary</td><td>Buttons, links, the active tab and selected options (darker and lighter shades are derived from it)</td></tr><tr><td>Secondary</td><td>Sale badges, special prices, wishlist hearts, cart and wishlist count badges</td></tr><tr><td>Tertiary</td><td>Header and tab bar background</td></tr><tr><td>Font</td><td>Main text, and header titles on a light header. Use a dark colour; the app background is light.</td></tr><tr><td>Button / Button Text</td><td>Main buttons. Leave empty to follow Primary with automatic text contrast.</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>Text on every colour switches between white and dark automatically. Error messages always stay red.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="opencart-settings-the-app-depends-on">OpenCart settings the app depends on</h3>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Setting</th><th>Where</th><th>Why</th></tr></thead><tbody><tr><td>Two-factor authentication <strong>off</strong></td><td>System → Settings → Option</td><td>The 2FA page only works in a browser, so app logins are refused while it&#39;s on</td></tr><tr><td>Session lifetime</td><td>System → Settings → Server</td><td>How long a customer stays logged in on the app without activity</td></tr><tr><td>Guest checkout, terms pages, password rules, price display, stock checkout, reviews</td><td>System → Settings → Option</td><td>Read by the app and enforced by the API</td></tr><tr><td>Shipping, payment and order total extensions</td><td>Extensions</td><td>All installed ones are supported</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="project-structure">Project structure</h2>
+<!-- /wp:heading -->
+
+<!-- wp:html -->
+<pre class="wp-block-code alignwide" style="white-space:pre;overflow-x:auto;font-size:.8em;line-height:1.45"><code>opencart-mobile-app/
+├── mobile/                       Expo app (TypeScript)
+│   ├── App.tsx                   Entry point: providers, error boundary, start screen
+│   ├── app.config.ts             App name, IDs, icon, splash, per-build settings
+│   ├── eas.json                  EAS Build profiles: development, preview, production
+│   ├── assets/                   Icon, adaptive icon, splash image
+│   └── src/                      Screens, components, API client, hooks, theme, tests
+├── opencart-extension/
+│   ├── mobile_api/               Mobile App API extension source (PHP)
+│   └── build.sh                  Builds mobile_api.ocmod.zip
+├── docs/                         Developer guide (Markdown, HTML, WordPress import)
+├── docker/                       Dev store image and setup script
+├── docker-compose.yml            Local OpenCart dev store
+├── Makefile                      Common tasks (make help)
+├── .github/workflows/ci.yml      Continuous integration
+├── CHANGELOG.md
+└── SECURITY.md</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p><code>store/</code>, <code>.env</code> and <code>mobile/.env</code> are created locally and are not committed.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="development">Development</h2>
+<!-- /wp:heading -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Command</th><th>What it does</th></tr></thead><tbody><tr><td><code>make help</code></td><td>Lists all tasks</td></tr><tr><td><code>make store</code></td><td>First-time setup of the local dev store</td></tr><tr><td><code>make up</code> / <code>make down</code> / <code>make logs</code></td><td>Start, stop and follow the dev store</td></tr><tr><td><code>make mobile-install</code> / <code>make mobile-start</code></td><td>Install the app&#39;s dependencies / start Expo with a clean cache</td></tr><tr><td><code>make extension</code></td><td>Lint the PHP and build <code>mobile_api.ocmod.zip</code></td></tr><tr><td><code>make check</code></td><td>Everything CI runs: PHP lint plus the app checks</td></tr><tr><td><code>make docs</code></td><td>Rebuild the HTML and WordPress versions of the developer guide</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>In <code>mobile/</code>, <code>npm run check</code> runs the type check, ESLint, the Prettier check and the unit tests. The individual steps are <code>npm run typecheck</code>, <code>npm run lint</code>, <code>npm run format</code> and <code>npm test</code>. <code>npm run doctor</code> checks dependency versions, and <code>npm run icons</code> regenerates the icon and splash.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>CI</strong> (<code>.github/workflows/ci.yml</code>) runs on every push and pull request:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>the app checks and <code>expo-doctor</code></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>production bundles for iOS and Android</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>a PHP syntax check on PHP 8.0 and 8.3</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>the extension zip, attached as a downloadable artifact</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><strong>Editing the extension:</strong> the source is <code>opencart-extension/mobile_api/</code>. The dev store runs its installed copy in <code>store/extension/mobile_api/</code>. Copy changed files across, or rebuild and reinstall the zip; reinstalling resets the module settings, including the API key.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>The <a href="https://github.com/rupaknepali/opencart-mobile/blob/main/docs/DEVELOPER.md">developer guide</a> explains the architecture and how to add screens, endpoints and settings.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="releasing">Releasing</h2>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="extension">Extension</h3>
+<!-- /wp:heading -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li>Bump <code>version</code> in <code>opencart-extension/mobile_api/install.json</code> and add an entry to <code>CHANGELOG.md</code>.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Run <code>make extension</code> and install the zip on the store.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Upgrading an installed copy means uninstalling and reinstalling it, which resets its settings. Note the API key and colours first, or upload just the changed PHP files.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":3} -->
+<h3 class="wp-block-heading" id="app-app-store-and-google-play">App (App Store and Google Play)</h3>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The app is built with <a href="https://docs.expo.dev/build/introduction/">EAS Build</a>. <code>mobile/eas.json</code> has three profiles:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Profile</th><th>Use</th><th>App ID and name</th></tr></thead><tbody><tr><td><code>development</code></td><td>Development client on your own devices</td><td><code>&lt;APP_BUNDLE_ID&gt;.dev</code>, &quot;… (Dev)&quot;</td></tr><tr><td><code>preview</code></td><td>Internal test builds</td><td><code>&lt;APP_BUNDLE_ID&gt;.preview</code>, &quot;… (Preview)&quot;</td></tr><tr><td><code>production</code></td><td>Store release; build numbers increase automatically</td><td><code>&lt;APP_BUNDLE_ID&gt;</code></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>Before the first production build:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Use an HTTPS store.</strong> Production builds refuse an <code>http://</code> store URL. Plain HTTP to the local network is only allowed in development and preview builds.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Choose your app ID.</strong> Set <code>APP_BUNDLE_ID</code> (e.g. <code>com.yourcompany.store</code>) and optionally <code>APP_NAME</code>. The production build stops while the ID is still <code>com.example.*</code>, because it can&#39;t be changed after publishing.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Use a new API key</strong> for production. Generate it in the module settings.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Add your branding</strong> to <code>mobile/assets/</code>, or edit <code>mobile/scripts/build-icons.cjs</code> and run <code>npm run icons</code>.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Set the build variables</strong> <code>APP_BUNDLE_ID</code>, <code>APP_NAME</code>, <code>EXPO_PUBLIC_STORE_URL</code>, <code>EXPO_PUBLIC_API_KEY</code> and <code>EXPO_PUBLIC_LANGUAGE</code>. Put them in the <code>env</code> block of the production profile in <code>eas.json</code>, or set them as <a href="https://docs.expo.dev/eas/environment-variables/">EAS environment variables</a>.</li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:html -->
+<pre class="wp-block-code alignwide" style="white-space:pre;overflow-x:auto;font-size:.8em;line-height:1.45"><code>npm install -g eas-cli
+cd mobile
+eas init                                       # links the project; set EAS_PROJECT_ID to the ID it prints
+eas build --platform all --profile production
+eas submit --platform ios                      # and --platform android</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:paragraph -->
+<p>The server-side checklist is in <a href="https://github.com/rupaknepali/opencart-mobile/blob/main/SECURITY.md">SECURITY.md</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="api-reference">API reference</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>Every endpoint is <code>GET|POST {store}/index.php?route=extension/mobile_api/api/{endpoint}</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Header</th><th></th></tr></thead><tbody><tr><td><code>X-Api-Key</code></td><td>Required on every request</td></tr><tr><td><code>X-Session-Token</code></td><td>The session ID. The server returns it in this response header and in <code>common.init</code>.</td></tr><tr><td><code>Content-Type: application/json</code></td><td>For POST bodies (form posts also work)</td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>Optional query parameters: <code>language=en-gb</code>, <code>currency=USD</code>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>Responses use one envelope, with HTTP status 400, 401, 403, 404, 409, 422, 429 or 503 on failure:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:html -->
+<pre class="wp-block-code alignwide" style="white-space:pre;overflow-x:auto;font-size:.8em;line-height:1.45"><code>{ &quot;success&quot;: true,  &quot;data&quot;: { ... }, &quot;message&quot;: &quot;optional&quot; }
+{ &quot;success&quot;: false, &quot;error&quot;: &quot;Message&quot;, &quot;errors&quot;: { &quot;field&quot;: &quot;Message&quot; } }</code></pre>
+<!-- /wp:html -->
+
+<!-- wp:table {"hasFixedLayout":false,"align":"wide"} -->
+<figure class="wp-block-table alignwide"><table><thead><tr><th>Endpoint</th><th>Method</th><th>Body / query</th></tr></thead><tbody><tr><td><code>common.init</code></td><td>GET</td><td>Store info, theme colours, settings, currencies, customer, <code>session_token</code></td></tr><tr><td><code>catalog.home</code></td><td>GET</td><td>Banners, categories, featured, latest, specials, bestsellers</td></tr><tr><td><code>catalog.categories</code></td><td>GET</td><td><code>parent_id</code></td></tr><tr><td><code>catalog.category</code></td><td>GET</td><td><code>category_id</code> → category, children, filter groups</td></tr><tr><td><code>catalog.manufacturers</code></td><td>GET</td><td></td></tr><tr><td><code>catalog.informations</code> / <code>catalog.information</code></td><td>GET</td><td><code>information_id</code></td></tr><tr><td><code>product.index</code></td><td>GET</td><td><code>category_id, sub_category, manufacturer_id, search, tag, description, filter, special, sort (default/newest/price_asc/price_desc/rating/name_asc/name_desc/model), page, limit</code></td></tr><tr><td><code>product.info</code></td><td>GET</td><td><code>product_id</code></td></tr><tr><td><code>product.reviews</code></td><td>GET</td><td><code>product_id, page</code></td></tr><tr><td><code>product.review</code></td><td>POST</td><td><code>?product_id</code> + <code>{author, text, rating}</code></td></tr><tr><td><code>cart.index</code></td><td>GET</td><td></td></tr><tr><td><code>cart.add</code></td><td>POST</td><td><code>{product_id, quantity, option: {product_option_id: value or [values]}, subscription_plan_id}</code></td></tr><tr><td><code>cart.edit</code> / <code>cart.remove</code> / <code>cart.clear</code></td><td>POST</td><td><code>{key, quantity}</code> / <code>{key}</code> / –</td></tr><tr><td><code>cart.coupon</code></td><td>POST</td><td><code>{coupon}</code> (empty removes it)</td></tr><tr><td><code>account.login</code> / <code>account.logout</code></td><td>POST</td><td><code>{email, password}</code></td></tr><tr><td><code>account.register</code></td><td>POST</td><td><code>{firstname, lastname, email, telephone, password, newsletter, agree}</code></td></tr><tr><td><code>account.forgotten</code></td><td>POST</td><td><code>{email}</code></td></tr><tr><td><code>account.profile</code></td><td>GET</td><td></td></tr><tr><td><code>account.edit</code></td><td>POST</td><td><code>{firstname, lastname, email, telephone}</code></td></tr><tr><td><code>account.password</code></td><td>POST</td><td><code>{current, password, confirm}</code></td></tr><tr><td><code>account.newsletter</code></td><td>POST</td><td><code>{newsletter: 0 or 1}</code></td></tr><tr><td><code>address.index</code> / <code>address.save</code> / <code>address.delete</code></td><td>GET/POST</td><td><code>{address_id?, firstname, lastname, company, address_1, address_2, city, postcode, country_id, zone_id, default}</code></td></tr><tr><td><code>wishlist.index</code> / <code>wishlist.add</code> / <code>wishlist.remove</code></td><td>GET/POST</td><td><code>{product_id}</code></td></tr><tr><td><code>order.index</code> / <code>order.info</code> / <code>order.reorder</code></td><td>GET/POST</td><td><code>page</code> / <code>order_id</code> / <code>{order_id, order_product_id}</code></td></tr><tr><td><code>localisation.countries</code> / <code>localisation.zones</code></td><td>GET</td><td><code>country_id</code></td></tr><tr><td><code>checkout.index</code></td><td>GET</td><td>Current checkout state</td></tr><tr><td><code>checkout.guest</code></td><td>POST</td><td><code>{firstname, lastname, email, telephone}</code></td></tr><tr><td><code>checkout.shippingAddress</code> / <code>checkout.paymentAddress</code></td><td>POST</td><td><code>{address_id}</code> or address fields (+ <code>save: true</code> to add it to the address book)</td></tr><tr><td><code>checkout.shippingMethods</code> / <code>checkout.shippingMethod</code></td><td>GET/POST</td><td><code>{code: &quot;flat.flat&quot;}</code></td></tr><tr><td><code>checkout.paymentMethods</code> / <code>checkout.paymentMethod</code></td><td>GET/POST</td><td><code>{code: &quot;cod.cod&quot;}</code></td></tr><tr><td><code>checkout.confirm</code></td><td>POST</td><td><code>{comment, agree}</code> → <code>status: complete</code>, or <code>payment_required</code> with a <code>payment_url</code></td></tr><tr><td><code>checkout.pay</code></td><td>GET (HTML)</td><td>Payment page for the web view</td></tr><tr><td><code>checkout.complete</code></td><td>POST</td><td>Finishes the order after the web view reaches <code>checkout/success</code></td></tr></tbody></table></figure>
+<!-- /wp:table -->
+
+<!-- wp:paragraph -->
+<p>Shipping and payment choices are checked against the quotes the server calculated and stored in the session, so a client can&#39;t set its own prices.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="security">Security</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li>Every endpoint checks the API key (constant-time comparison). Account, address and order endpoints also require a logged-in customer and only return that customer&#39;s data.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Prices, totals, shipping and payment are always calculated on the server.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>The session token is kept in the iOS Keychain or Android Keystore. Release builds only talk to an HTTPS store.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>Login uses OpenCart&#39;s login-attempt limit. Forgotten-password requests give the same answer whether or not the email exists.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>The API key ships inside the app, so treat it as an app identifier, not a secret.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Report vulnerabilities and find the production checklist in <a href="https://github.com/rupaknepali/opencart-mobile/blob/main/SECURITY.md">SECURITY.md</a>. The full analysis is in <a href="https://github.com/rupaknepali/opencart-mobile/blob/main/docs/DEVELOPER.md#14-security-measures">§14 of the developer guide</a>.</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="known-limitations">Known limitations</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>File-upload product options</strong> can&#39;t be filled in from the app. The product page asks the customer to order that product on the website.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>No captcha</strong> on registration and reviews, because captchas are browser widgets. The API key and the login-attempt limit are the protection.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Two-factor authentication</strong> must be off for app logins.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>One store and one language per build:</strong> the default store (<code>store_id</code> 0) and the language in <code>EXPO_PUBLIC_LANGUAGE</code>.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Colour changes</strong> in the admin show up the next time the app is opened.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p><strong>Testing status:</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><strong>Checks that pass:</strong><!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><code>make check</code>: PHP 8.0 and 8.3 syntax, TypeScript, ESLint, Prettier and the unit tests.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><code>expo-doctor</code> (20/20).</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li>The production bundle builds.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>End-to-end run</strong> against the local 4.1.0.4 store passed: browsing, cart, coupons, wishlist, guest and logged-in checkout with Cash on Delivery, accounts, orders, currency switching and API key rejection.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><strong>Not tested yet:</strong> online payment gateways in the web view, and a production HTTPS store. Try both on a staging copy before going live.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="documentation">Documentation</h2>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><a href="https://github.com/rupaknepali/opencart-mobile/blob/main/docs/DEVELOPER.md">Developer guide</a>: architecture, tools and why they were chosen, design patterns, hooks, every user flow, configuration, security, and how to extend the app.<!-- wp:list -->
+<ul class="wp-block-list"><!-- wp:list-item -->
+<li><a href="https://github.com/rupaknepali/opencart-mobile/blob/main/docs/developer-guide.html">HTML version</a>: open it in a browser.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="https://github.com/rupaknepali/opencart-mobile/blob/main/docs/developer-guide.wordpress.xml">WordPress import</a>: a 5-part series of draft posts with SEO titles and meta descriptions. Import it with <strong>Tools → Import → WordPress</strong>. The featured images and how to attach them are in <a href="https://github.com/rupaknepali/opencart-mobile/tree/main/docs/featured-images">docs/featured-images/</a>.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list --></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="https://github.com/rupaknepali/opencart-mobile/blob/main/docs/readme-post.wordpress.xml">README as a WordPress post</a>: this page as one draft post introducing the project, with GitHub links and buttons, linked to the guide series. Rebuild it with <code>cd docs &amp;&amp; npm run build:readme-post</code> after changing the README.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="https://github.com/rupaknepali/opencart-mobile/blob/main/CHANGELOG.md">CHANGELOG.md</a>: release notes.</li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="https://github.com/rupaknepali/opencart-mobile/blob/main/SECURITY.md">SECURITY.md</a>: reporting vulnerabilities and the production checklist.</li>
+<!-- /wp:list-item --></ul>
+<!-- /wp:list -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator has-alpha-channel-opacity"/>
+<!-- /wp:separator -->
+
+<!-- wp:heading -->
+<h2 class="wp-block-heading" id="developer-guide-series">Developer guide series</h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>The full developer guide is also published here as a five-part series:</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:list {"ordered":true} -->
+<ol class="wp-block-list"><!-- wp:list-item -->
+<li><a href="/?name=opencart-mobile-app-developer-guide-part-1">Part 1: Overview, Architecture, Repository Layout and Languages</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="/?name=opencart-mobile-app-developer-guide-part-2">Part 2: Tools and Libraries, Why Expo, and the Development Environment</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="/?name=opencart-mobile-app-developer-guide-part-3">Part 3: The OpenCart Extension and the Mobile App</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="/?name=opencart-mobile-app-developer-guide-part-4">Part 4: Design Patterns, Hooks and End-to-End Flows</a></li>
+<!-- /wp:list-item -->
+<!-- wp:list-item -->
+<li><a href="/?name=opencart-mobile-app-developer-guide-part-5">Part 5: Configuration, Security, Extending, Testing, Releasing and Troubleshooting</a></li>
+<!-- /wp:list-item --></ol>
+<!-- /wp:list -->
+
+<!-- wp:paragraph -->
+<p>Source code, issues and releases: <a href="https://github.com/rupaknepali/opencart-mobile">github.com/rupaknepali/opencart-mobile</a>.</p>
+<!-- /wp:paragraph -->]]></content:encoded>
+    <excerpt:encoded><![CDATA[A native iOS and Android shopping app for OpenCart 4.1.0.4 stores, built with Expo and React Native, with its own Mobile App API extension. Code on GitHub.]]></excerpt:encoded>
+    <wp:post_id>900300</wp:post_id>
+    <wp:post_date><![CDATA[2026-11-12 22:13:00]]></wp:post_date>
+    <wp:post_date_gmt><![CDATA[2026-11-13 05:13:00]]></wp:post_date_gmt>
+    <wp:post_modified><![CDATA[2026-11-12 22:13:00]]></wp:post_modified>
+    <wp:post_modified_gmt><![CDATA[2026-11-13 05:13:00]]></wp:post_modified_gmt>
+    <wp:comment_status><![CDATA[open]]></wp:comment_status>
+    <wp:ping_status><![CDATA[open]]></wp:ping_status>
+    <wp:post_name><![CDATA[opencart-mobile-app]]></wp:post_name>
+    <wp:status><![CDATA[draft]]></wp:status>
+    <wp:post_parent>0</wp:post_parent>
+    <wp:menu_order>0</wp:menu_order>
+    <wp:post_type><![CDATA[post]]></wp:post_type>
+    <wp:post_password><![CDATA[]]></wp:post_password>
+    <wp:is_sticky>0</wp:is_sticky>
+    <category domain="category" nicename="opencart-mobile-app"><![CDATA[OpenCart Mobile App]]></category>
+    <category domain="post_tag" nicename="opencart"><![CDATA[OpenCart]]></category>
+    <category domain="post_tag" nicename="react-native"><![CDATA[React Native]]></category>
+    <category domain="post_tag" nicename="expo"><![CDATA[Expo]]></category>
+    <category domain="post_tag" nicename="ecommerce-app"><![CDATA[Ecommerce App]]></category>
+    <category domain="post_tag" nicename="github"><![CDATA[GitHub]]></category>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[_yoast_wpseo_title]]></wp:meta_key>
+      <wp:meta_value><![CDATA[OpenCart Mobile App for iOS & Android (OpenCart 4.1.0.4)]]></wp:meta_value>
+    </wp:postmeta>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[_yoast_wpseo_metadesc]]></wp:meta_key>
+      <wp:meta_value><![CDATA[A native iOS and Android shopping app for OpenCart 4.1.0.4 stores, built with Expo and React Native, with its own Mobile App API extension. Code on GitHub.]]></wp:meta_value>
+    </wp:postmeta>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[rank_math_title]]></wp:meta_key>
+      <wp:meta_value><![CDATA[OpenCart Mobile App for iOS & Android (OpenCart 4.1.0.4)]]></wp:meta_value>
+    </wp:postmeta>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[rank_math_description]]></wp:meta_key>
+      <wp:meta_value><![CDATA[A native iOS and Android shopping app for OpenCart 4.1.0.4 stores, built with Expo and React Native, with its own Mobile App API extension. Code on GitHub.]]></wp:meta_value>
+    </wp:postmeta>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[_seopress_titles_title]]></wp:meta_key>
+      <wp:meta_value><![CDATA[OpenCart Mobile App for iOS & Android (OpenCart 4.1.0.4)]]></wp:meta_value>
+    </wp:postmeta>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[_seopress_titles_desc]]></wp:meta_key>
+      <wp:meta_value><![CDATA[A native iOS and Android shopping app for OpenCart 4.1.0.4 stores, built with Expo and React Native, with its own Mobile App API extension. Code on GitHub.]]></wp:meta_value>
+    </wp:postmeta>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[_genesis_title]]></wp:meta_key>
+      <wp:meta_value><![CDATA[OpenCart Mobile App for iOS & Android (OpenCart 4.1.0.4)]]></wp:meta_value>
+    </wp:postmeta>
+    <wp:postmeta>
+      <wp:meta_key><![CDATA[_genesis_description]]></wp:meta_key>
+      <wp:meta_value><![CDATA[A native iOS and Android shopping app for OpenCart 4.1.0.4 stores, built with Expo and React Native, with its own Mobile App API extension. Code on GitHub.]]></wp:meta_value>
+    </wp:postmeta>
+  </item>
+</channel>
+</rss>
