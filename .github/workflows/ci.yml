@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  mobile:
+    name: Mobile app
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mobile
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: mobile/package-lock.json
+      - run: npm ci
+      - name: Type-check, lint, format-check and test
+        run: npm run check
+      - name: Expo doctor
+        run: npx expo-doctor
+      - name: Production bundle builds
+        env:
+          # Placeholder values: this only proves the bundle compiles.
+          EXPO_PUBLIC_STORE_URL: https://store.example.com/
+          EXPO_PUBLIC_API_KEY: ciplaceholderkey0000000000000000000000
+        run: npx expo export --platform ios --platform android --output-dir /tmp/expo-export
+
+  extension:
+    name: OpenCart extension (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['8.0', '8.3']
+    container: php:${{ matrix.php }}-cli
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax check
+        run: |
+          status=0
+          for f in $(find opencart-extension/mobile_api -name '*.php'); do
+            php -l "$f" >/dev/null || status=1
+          done
+          exit $status
+
+  package:
+    name: Package extension
+    runs-on: ubuntu-latest
+    needs: extension
+    steps:
+      - uses: actions/checkout@v4
+      - run: sh opencart-extension/build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mobile_api.ocmod.zip
+          path: opencart-extension/mobile_api.ocmod.zip
+          if-no-files-found: error

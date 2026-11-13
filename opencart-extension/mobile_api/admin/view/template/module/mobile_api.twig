@@ -1,0 +1,137 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="float-end">
+        <button type="submit" form="form-module" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa-solid fa-save"></i></button>
+        <a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fa-solid fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="alert alert-info"><i class="fa-solid fa-circle-info"></i> {{ text_help }}<br/><strong>{{ text_endpoint }}:</strong> <code>{{ api_base }}</code></div>
+    <div class="card">
+      <div class="card-header"><i class="fa-solid fa-pencil"></i> {{ text_edit }}</div>
+      <div class="card-body">
+        <form id="form-module" action="{{ save }}" method="post" data-oc-toggle="ajax">
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <div class="form-check form-switch form-switch-lg">
+                <input type="hidden" name="module_mobile_api_status" value="0"/>
+                <input type="checkbox" name="module_mobile_api_status" value="1" id="input-status" class="form-check-input"{% if module_mobile_api_status %} checked{% endif %}/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3 required">
+            <label for="input-key" class="col-sm-2 col-form-label">{{ entry_key }}</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="text" name="module_mobile_api_key" value="{{ module_mobile_api_key }}" id="input-key" class="form-control font-monospace"/>
+                <button type="button" id="button-generate" class="btn btn-outline-secondary"><i class="fa-solid fa-rotate"></i> {{ text_generate }}</button>
+              </div>
+              <div id="error-key" class="invalid-feedback"></div>
+              <div class="form-text">{{ help_key }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-cors" class="col-sm-2 col-form-label">{{ entry_cors }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_mobile_api_cors" value="{{ module_mobile_api_cors }}" id="input-cors" class="form-control"/>
+              <div class="form-text">{{ help_cors }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-banner" class="col-sm-2 col-form-label">{{ entry_banner }}</label>
+            <div class="col-sm-10">
+              <select name="module_mobile_api_banner_id" id="input-banner" class="form-select">
+                <option value="0">{{ text_none }}</option>
+                {% for banner in banners %}
+                  <option value="{{ banner.banner_id }}"{% if banner.banner_id == module_mobile_api_banner_id %} selected{% endif %}>{{ banner.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-featured" class="col-sm-2 col-form-label">{{ entry_featured }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="module_mobile_api_featured" value="{{ module_mobile_api_featured }}" id="input-featured" class="form-control"/>
+              <div class="form-text">{{ help_featured }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-home-limit" class="col-sm-2 col-form-label">{{ entry_home_limit }}</label>
+            <div class="col-sm-10">
+              <input type="number" min="1" max="50" name="module_mobile_api_home_limit" value="{{ module_mobile_api_home_limit }}" id="input-home-limit" class="form-control"/>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">{{ entry_image }}</label>
+            <div class="col-sm-10">
+              <div class="input-group">
+                <input type="number" min="50" name="module_mobile_api_image_width" value="{{ module_mobile_api_image_width }}" class="form-control"/>
+                <span class="input-group-text">x</span>
+                <input type="number" min="50" name="module_mobile_api_image_height" value="{{ module_mobile_api_image_height }}" class="form-control"/>
+              </div>
+            </div>
+          </div>
+          <fieldset>
+            <legend>{{ text_colors }}</legend>
+            {% for color in colors %}
+              <div class="row mb-3">
+                <label for="input-color-{{ color.code }}" class="col-sm-2 col-form-label">{{ color.label }}</label>
+                <div class="col-sm-10">
+                  <div class="input-group" style="max-width: 360px;">
+                    <input type="color" value="{{ color.swatch }}" data-oc-target="#input-color-{{ color.code }}" class="form-control form-control-color mobile-api-swatch" title="{{ color.label }}"/>
+                    <input type="text" name="{{ color.name }}" value="{{ color.value }}" id="input-color-{{ color.code }}" class="form-control mobile-api-hex" maxlength="7" placeholder="{{ color.placeholder }}"/>
+                    <button type="button" class="btn btn-outline-secondary mobile-api-reset" data-default="{{ color.default }}" data-swatch="{{ color.swatch }}" data-oc-target="#input-color-{{ color.code }}">{{ text_reset }}</button>
+                  </div>
+                  <div id="error-color-{{ color.code }}" class="invalid-feedback"></div>
+                  <div class="form-text">{{ color.help }}</div>
+                </div>
+              </div>
+            {% endfor %}
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('.mobile-api-swatch').on('input', function() {
+    $($(this).attr('data-oc-target')).val(this.value);
+});
+
+$('.mobile-api-hex').on('input', function() {
+    if (/^#[0-9a-fA-F]{6}$/.test(this.value)) {
+        $('.mobile-api-swatch[data-oc-target="#' + this.id + '"]').val(this.value);
+    }
+});
+
+$('.mobile-api-reset').on('click', function() {
+    var target = $(this).attr('data-oc-target');
+
+    $(target).val($(this).attr('data-default')).trigger('input');
+
+    if (!$(this).attr('data-default')) {
+        $('.mobile-api-swatch[data-oc-target="' + target + '"]').val($(this).attr('data-swatch'));
+    }
+});
+
+$('#button-generate').on('click', function() {
+    var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var values = new Uint32Array(40);
+    window.crypto.getRandomValues(values);
+    var key = '';
+    for (var i = 0; i < values.length; i++) {
+        key += chars[values[i] % chars.length];
+    }
+    $('#input-key').val(key);
+});
+//--></script>
+{{ footer }}

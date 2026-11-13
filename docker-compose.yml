@@ -1,0 +1,30 @@
+# Local OpenCart 4.1.0.4 store for DEVELOPING the mobile app. Not a production setup.
+#   make store                -> first time: downloads and installs OpenCart into ./store
+#   docker compose up -d      -> storefront http://localhost:8090/  admin http://localhost:8090/admin/
+services:
+  web:
+    build: ./docker/php
+    ports:
+      # 127.0.0.1 by default. Set STORE_BIND_ADDRESS=0.0.0.0 in .env to test on a phone over Wi-Fi.
+      - "${STORE_BIND_ADDRESS:-127.0.0.1}:${STORE_PORT:-8090}:80"
+    volumes:
+      - ./store:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mariadb:11.4
+    environment:
+      MARIADB_DATABASE: ${DB_NAME}
+      MARIADB_USER: ${DB_USER}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+volumes:
+  db_data:

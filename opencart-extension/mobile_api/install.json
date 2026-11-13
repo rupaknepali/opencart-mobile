@@ -1,0 +1,7 @@
+{
+  "name": "Mobile App API",
+  "description": "JSON REST API for the OpenCart mobile app: catalog, cart, customer accounts, wishlist, orders and checkout with every installed shipping, payment and total extension. Built for OpenCart 4.1.0.4.",
+  "version": "1.0.0",
+  "author": "OpenCart Mobile App",
+  "link": ""
+}
