@@ -4,7 +4,7 @@ SHELL := /bin/bash
 
 PHP_IMAGE ?= php:8.3-cli
 
-.PHONY: help store up down logs extension php-lint mobile-install mobile-check mobile-start docs check
+.PHONY: help store up down logs extension php-lint mobile-install mobile-check mobile-start check
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
@@ -38,7 +38,5 @@ mobile-check: ## Type-check, lint, format-check and test the app
 mobile-start: ## Start Expo (clears the bundler cache)
 	cd mobile && npx expo start -c
 
-docs: ## Rebuild the HTML and WordPress versions of docs/DEVELOPER.md
-	cd docs && npm ci --silent && npm run build
 
 check: php-lint mobile-check ## Everything CI runs

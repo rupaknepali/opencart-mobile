@@ -4,8 +4,3 @@
 *.jpg binary
 *.ico binary
 *.zip binary
-
-# Generated from docs/DEVELOPER.md — collapse in diffs
-docs/developer-guide.html linguist-generated=true
-docs/developer-guide.wordpress.xml linguist-generated=true
-docs/readme-post.wordpress.xml linguist-generated=true

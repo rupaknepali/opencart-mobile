@@ -11,7 +11,8 @@
  *
  * EXPO_PUBLIC_* values are compiled into the app bundle, so they are NOT secret.
  * The API key identifies the app; it does not protect anything on its own
- * (see docs/DEVELOPER.md §14.2).
+ * (see §14.2 of the developer guide:
+ * https://webocreation.com/opencart-mobile-app-developer-guide-part-5/#14-security-measures).
  *
  * Expo only inlines these when they are referenced literally as
  * process.env.EXPO_PUBLIC_NAME, so don't read them dynamically.

@@ -30,4 +30,4 @@ Repository:
 
 ## Design notes and known limits
 
-The full list of security measures and their limits (why the API key is not a secret, the payment-page token, missing captcha, session handling) is in [docs/DEVELOPER.md §14](docs/DEVELOPER.md#14-security-measures).
+The full list of security measures and their limits (why the API key is not a secret, the payment-page token, missing captcha, session handling) is in [§14 of the developer guide](https://webocreation.com/opencart-mobile-app-developer-guide-part-5/#14-security-measures).

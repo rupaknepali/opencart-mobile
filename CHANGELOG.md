@@ -23,4 +23,4 @@ The mobile app (`mobile/app.config.ts`) and the extension (`opencart-extension/m
 ### Project
 
 - Local Docker dev store with one-command setup (`make store`), `Makefile`, GitHub Actions CI (app checks, PHP 8.0/8.3 lint, extension package artifact).
-- Developer guide in Markdown, HTML and a 5-post WordPress import with featured images and SEO fields.
+- Documentation published on webocreation.com: a project overview and a 5-part developer guide.
